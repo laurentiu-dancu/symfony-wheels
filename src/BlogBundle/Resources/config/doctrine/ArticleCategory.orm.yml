@@ -18,7 +18,9 @@ BlogBundle\Entity\ArticleCategory:
         updatedAt:
             type: datetime
             nullable: true
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [setCreatedAtValue, setUpdatedAtValue]
+        preUpdate: [setUpdatedAtValue]
 
     oneToMany:
         articles:

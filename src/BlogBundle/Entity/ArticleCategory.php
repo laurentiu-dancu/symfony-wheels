@@ -2,11 +2,15 @@
 
 namespace BlogBundle\Entity;
 
+use DateTime;
+
 /**
  * ArticleCategory
  */
 class ArticleCategory
 {
+    use TimeStampLoggerTrait;
+
     /**
      * @var integer
      */
@@ -16,17 +20,6 @@ class ArticleCategory
      * @var string
      */
     private $name;
-
-    /**
-     * @var \DateTime
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    private $updatedAt;
-
 
     /**
      * Get id
@@ -62,53 +55,6 @@ class ArticleCategory
         return $this->name;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return ArticleCategory
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return ArticleCategory
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -155,4 +101,5 @@ class ArticleCategory
     {
         return $this->articles;
     }
+
 }
