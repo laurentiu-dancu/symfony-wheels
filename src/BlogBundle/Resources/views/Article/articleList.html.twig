@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for article in articles %}
+        <div>
+            <h2><a href="{{ path('article_detail', {id: article.id}) }}">{{ article.title }}</a></h2>
+            <p>
+                {{ article.content[1:150] }}
+                {% if article.content|length > 150 %}...{% endif %}
+            </p>
+        </div>
+    {% endfor %}
+{% endblock %}
