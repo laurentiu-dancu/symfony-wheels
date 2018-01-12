@@ -2,8 +2,6 @@
 
 namespace BlogBundle\Entity;
 
-use DateTime;
-
 /**
  * ArticleCategory
  */
