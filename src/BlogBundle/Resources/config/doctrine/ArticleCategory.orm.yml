@@ -1,0 +1,26 @@
+BlogBundle\Entity\ArticleCategory:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }
+
+    oneToMany:
+        articles:
+            targetEntity: BlogBundle\Entity\Article
+            mappedBy: category # this specifies what attribute will hold the Category on Article

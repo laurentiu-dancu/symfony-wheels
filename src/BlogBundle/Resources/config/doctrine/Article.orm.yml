@@ -1,0 +1,37 @@
+BlogBundle\Entity\Article:
+    type: entity
+    table: null
+    repositoryClass: BlogBundle\Repository\ArticleRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+            nullable: true
+        content:
+            type: text
+            nullable: true
+        image:
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }
+
+    manyToOne:
+        category:
+            targetEntity: BlogBundle\Entity\ArticleCategory
+            inversedBy: articles # this specifies what attribute will hold the list of articles on ArticleCategory
+            joinColumn:
+                name: category_id # the name of the join column
+                referencedColumnName: id # the name of the column on ArticleCategory which holds the unique index of a row
