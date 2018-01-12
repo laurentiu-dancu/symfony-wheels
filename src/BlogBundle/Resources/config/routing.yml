@@ -7,3 +7,7 @@ article_detail:
     defaults: { _controller: BlogBundle:Article:detail }
     requirements:
         id: \d+
+
+category_list:
+    path: /category/{id}
+    defaults: { _controller: BlogBundle:Category:list }
