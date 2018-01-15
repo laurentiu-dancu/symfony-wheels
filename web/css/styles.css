@@ -1,0 +1,37 @@
+.main-container {
+    background: rgba(220, 220, 220, 0.8);
+    margin: 0 16px;
+    border-radius: 3px;
+}
+
+.images-container {
+    padding: 4px 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+
+#background-image {
+    background: url("images/spin.gif") repeat;
+    display: block;
+    height: 1980px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1;
+}
+
+.content {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    top: 10px;
+    left: 0;
+    position: relative;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 60px;
+    right: 0;
+    z-index: 2;
+    padding: 0 0 20px;
+}
