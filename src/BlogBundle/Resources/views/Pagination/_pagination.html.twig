@@ -1,0 +1,43 @@
+{% set paginationRouteParams = paginationRouteParams is defined ? paginationRouteParams : {} %}
+
+<div class="row">
+    <div class="dropdown col-lg-4">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Items per page: {{ currentLimit }}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {% for limit in limits %}
+                {% set params =  {limit: limit, page: 1}|merge(paginationRouteParams) %}
+                <li class="{% if currentLimit == limit %}disabled{% endif %}">
+                    <a href="{{ path(paginationRouteName, params) }}">
+                        {{ limit }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<nav class="col-lg-4">
+    <ul class="pagination">
+        <li class="{% if currentPage == 1 %}disabled{% endif %}">
+            {% set params =  {limit: currentLimit, page: currentPage - 1}|merge(paginationRouteParams) %}
+            <a href="{% if currentPage > 1 %}{{ path(paginationRouteName, params) }}{% endif %}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% for page in 1..totalPages %}
+            <li class="{% if page == currentPage %}active{% endif %}">
+                {% set params =  {limit: currentLimit, page: page}|merge(paginationRouteParams) %}
+                <a href="{{ path(paginationRouteName, params) }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+        <li class="{% if currentPage == totalPages %}disabled{% endif %}">
+            {% set params =  {limit: currentLimit, page: currentPage + 1}|merge(paginationRouteParams) %}
+            <a href="{% if currentPage < totalPages %}{{ path(paginationRouteName, params) }}{% endif %}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

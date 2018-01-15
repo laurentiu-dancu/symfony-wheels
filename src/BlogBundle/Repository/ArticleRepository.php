@@ -12,23 +12,33 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-    public function getPaginated($pageNr, $limit)
+    public function getPaginated($pageNr, $limit, $categoryId = null)
     {
         $firstResult = ($pageNr - 1) * $limit;
-        $qb = $this->createQueryBuilder('a')
-            ->setFirstResult($firstResult)
+        $qb = $this->createQueryBuilder('a');
+        if ($categoryId) {
+            $qb = $qb->where('a.category = :categoryId')
+                ->setParameter('categoryId', $categoryId);
+        }
+        $qb->setFirstResult($firstResult)
             ->setMaxResults($limit);
 
         return $qb->getQuery()->getResult();
     }
 
     /**
+     * @param null $categoryId
      * @return int
      */
-    public function countArticles()
+    public function countArticles($categoryId = null)
     {
         $qb= $this->createQueryBuilder('a')
             ->select('COUNT(a)');
+
+        if ($categoryId) {
+            $qb = $qb->where('a.category = :categoryId')
+                ->setParameter('categoryId', $categoryId);
+        }
 
         return $qb->getQuery()->getSingleScalarResult();
     }

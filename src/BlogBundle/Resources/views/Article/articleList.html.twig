@@ -11,42 +11,6 @@
         </div>
     {% endfor %}
 
-    <div class="row">
-        <div class="dropdown col-lg-4">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Items per page: {{ currentLimit }}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                {% for limit in limits %}
-                    <li class="{% if currentLimit == limit %}disabled{% endif %}">
-                        <a href="{{ path('blog_homepage', {limit: limit, page: 1}) }}">
-                            {{ limit }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-
-    <nav class="col-lg-4">
-        <ul class="pagination">
-            <li class="{% if currentPage == 1 %}disabled{% endif %}">
-                <a href="{% if currentPage > 1 %}{{ path('blog_homepage', {limit: currentLimit, page: currentPage - 1}) }}{% endif %}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            {% for page in 1..totalPages %}
-                <li class="{% if page == currentPage %}active{% endif %}">
-                    <a href="{{ path('blog_homepage', {limit: currentLimit, page: page}) }}">{{ page }}</a>
-                </li>
-            {% endfor %}
-            <li class="{% if currentPage == totalPages %}disabled{% endif %}">
-                <a href="{% if currentPage < totalPages %}{{ path('blog_homepage', {limit: currentLimit, page: currentPage + 1}) }}{% endif %}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    {{ include('@Blog/Pagination/_pagination.html.twig') }}
 
 {% endblock %}

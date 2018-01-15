@@ -5,8 +5,12 @@ namespace BlogBundle\Controller;
 use BlogBundle\Entity\Article;
 use BlogBundle\Entity\ArticleCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
-class CategoryController extends Controller {
+class CategoryController extends Controller
+{
+    const PAGINATION_LIMITS = [2, 5, 10, 20];
+
     public function _categoryMenuAction() {
         $repo = $this->getDoctrine()->getManager()->getRepository(ArticleCategory::class);
         $categories = $repo->findAll();
@@ -21,12 +25,33 @@ class CategoryController extends Controller {
 
     public function listAction(ArticleCategory $category) {
         $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
-        $articles = $repo->findBy(['category' => $category]);
+        $request = Request::createFromGlobals();
+
+        $currentPageNr = $request->query->getInt('page', 1);
+        $currentPageLimit = $request->query->getInt('limit', static::PAGINATION_LIMITS[1]);
+
+        if (!in_array($currentPageLimit, static::PAGINATION_LIMITS)) {
+            return $this->redirectToRoute('blog_homepage');
+        }
+
+        $totalPages = ceil($repo->countArticles($category->getId()) / $currentPageLimit);
+
+        if ($currentPageNr < 1 || $currentPageNr > $totalPages) {
+            return $this->redirectToRoute('blog_homepage');
+        }
+
+        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit, $category->getId());
 
         return $this->render(
             '@Blog/Article/articleList.html.twig',
             [
-                'articles' => $articles
+                'articles' => $articles,
+                'paginationRouteName' => 'category_list',
+                'paginationRouteParams' => ['id' => $category->getId()],
+                'currentLimit' => $currentPageLimit,
+                'limits' => static::PAGINATION_LIMITS,
+                'currentPage' => $currentPageNr,
+                'totalPages' => $totalPages,
             ]
         );
     }

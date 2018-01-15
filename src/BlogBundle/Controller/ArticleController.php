@@ -42,7 +42,9 @@ class ArticleController extends Controller
                 'currentLimit' => $currentPageLimit,
                 'limits' => static::PAGINATION_LIMITS,
                 'currentPage' => $currentPageNr,
-                'totalPages' => ceil($repo->countArticles() / $currentPageLimit),
+                'totalPages' => $totalPages,
+                'paginationRouteName' => 'blog_homepage',
+                'paginationRouteParams' => [],
             ]
         );
     }
