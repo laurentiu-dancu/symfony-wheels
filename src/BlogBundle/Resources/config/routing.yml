@@ -11,3 +11,14 @@ article_detail:
 category_list:
     path: /category/{id}
     defaults: { _controller: BlogBundle:Category:list }
+
+article_create:
+    path: /article/create
+    defaults: { _controller: BlogBundle:Article:create }
+
+article_delete:
+    path: /article/{id}/delete
+    defaults: { _controller: BlogBundle:Article:delete }
+    methods: [POST]
+    requirements:
+        id: \d+

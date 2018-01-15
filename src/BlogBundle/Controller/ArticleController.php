@@ -4,6 +4,7 @@ namespace BlogBundle\Controller;
 
 use BlogBundle\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -54,5 +55,39 @@ class ArticleController extends Controller
         return $this->render('@Blog/Article/articleDetail.html.twig', [
             'article' => $article
         ]);
+    }
+
+    public function createAction(Request $request)
+    {
+        $article = new Article();
+        $form = $this->createFormBuilder($article)
+            ->add('title')
+            ->add('content')
+            ->add('save', SubmitType::class, ['label' => 'Publish'])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
+
+            return $this->redirectToRoute('blog_homepage');
+        }
+
+        return $this->render('@Blog/Article/articleCreate.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function deleteAction(Article $article)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($article);
+        $em->flush();
+
+        return $this->redirectToRoute('blog_homepage');
     }
 }

@@ -3,6 +3,7 @@
 namespace BlogBundle\Entity;
 
 use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 
 trait TimeStampLoggerTrait {
 

@@ -8,6 +8,11 @@
                 {{ article.content[0:150] }}
                 {% if article.content|length > 150 %}...{% endif %}
             </p>
+            <div>
+                <form action="{{ path('article_delete', {id: article.id}) }}" method="post">
+                    <input type="submit" class="btn btn-danger" value="Nuke"/>
+                </form>
+            </div>
         </div>
     {% endfor %}
 
