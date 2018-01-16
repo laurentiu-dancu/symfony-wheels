@@ -15,6 +15,8 @@ class Article
     private $id;
 
     /**
+     * @BlogBundle\Validator\Constraints\NotContainsPercent
+     *
      * @var string
      */
     private $title;

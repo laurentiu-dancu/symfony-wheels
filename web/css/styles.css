@@ -36,3 +36,7 @@
     z-index: 2;
     padding: 0 0 20px;
 }
+
+.form-inline {
+    display: inline-flex;
+}

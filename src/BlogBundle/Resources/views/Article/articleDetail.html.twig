@@ -6,11 +6,11 @@
         <hr/>
         <img src="{{ article.image }}"/>
         <p>{{ article.content }}</p>
-        <form class="form-inline">
+        <div class="form-inline">
             <a href="{{ path('article_edit', {id: article.id}) }}" class="btn btn-primary">Edit</a>
             <form action="{{ path('article_delete', {id: article.id}) }}" method="post">
                 <input type="submit" class="btn btn-danger delete-btn" value="Delet"/>
             </form>
-        </form>
+        </div>
     </div>
 {% endblock %}

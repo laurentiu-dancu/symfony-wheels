@@ -14,7 +14,7 @@ BLOG.registerDeleteConfirmation = function() {
     // register an event listener on the delete button click
     deleteBtn.on('click', function(event) {
         // generate a confirm javascript alert
-        var isConfirmed = confirm('Are you sure you want to delete this?');
+        var isConfirmed = confirm('Are you sure you want to exist?');
         /* of the response is false, prevent the clicking flow to continue,
          in this case the form submitting */
         if (!isConfirmed) {
