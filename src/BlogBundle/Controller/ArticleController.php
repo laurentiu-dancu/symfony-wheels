@@ -3,7 +3,10 @@
 namespace BlogBundle\Controller;
 
 use BlogBundle\Entity\Article;
+use BlogBundle\Entity\ArticleCategory;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ArticleController extends Controller
 {
     const PAGINATION_LIMITS = [2, 5, 10, 20];
+    const MAX_TITLE_LENGTH = 50;
 
     public function indexAction()
     {
@@ -61,8 +65,17 @@ class ArticleController extends Controller
     {
         $article = new Article();
         $form = $this->createFormBuilder($article)
-            ->add('title')
+            ->add('title', null, [
+                'label' => 'Article title',
+                'label_attr' => ['class' => 'label label-success'],
+                'attr' => [
+                    'maxlength' => static::MAX_TITLE_LENGTH,
+                ],
+            ])
             ->add('content')
+            ->add('category', EntityType::class, [
+                'class' => ArticleCategory::class,
+            ])
             ->add('save', SubmitType::class, ['label' => 'Publish'])
             ->getForm();
 

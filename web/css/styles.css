@@ -2,6 +2,7 @@
     background: rgba(220, 220, 220, 0.8);
     margin: 0 16px;
     border-radius: 3px;
+    max-width: 980px;
 }
 
 .images-container {

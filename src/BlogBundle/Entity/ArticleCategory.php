@@ -100,4 +100,9 @@ class ArticleCategory
         return $this->articles;
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
 }
