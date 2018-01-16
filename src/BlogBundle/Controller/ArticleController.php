@@ -18,10 +18,9 @@ class ArticleController extends Controller
     const PAGINATION_LIMITS = [2, 5, 10, 20];
 
 
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
-        $request = Request::createFromGlobals();
 
         $currentPageNr = $request->query->getInt('page', 1);
         $currentPageLimit = $request->query->getInt('limit', static::PAGINATION_LIMITS[1]);
@@ -62,9 +61,9 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function createAction(Request $request)
+    public function createAction(Request $request, Article $article = null)
     {
-        $article = new Article();
+        $article = $article ?: new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -73,7 +72,7 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('blog_homepage');
+            return $this->redirectToRoute('article_detail', ['id' => $article->getId()]);
         }
 
         return $this->render('@Blog/Article/articleCreate.html.twig', [
@@ -91,4 +90,5 @@ class ArticleController extends Controller
 
         return $this->redirectToRoute('blog_homepage');
     }
+
 }

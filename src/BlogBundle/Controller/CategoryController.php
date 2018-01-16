@@ -23,9 +23,8 @@ class CategoryController extends Controller
         );
     }
 
-    public function listAction(ArticleCategory $category) {
+    public function listAction(ArticleCategory $category, Request $request) {
         $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
-        $request = Request::createFromGlobals();
 
         $currentPageNr = $request->query->getInt('page', 1);
         $currentPageLimit = $request->query->getInt('limit', static::PAGINATION_LIMITS[1]);

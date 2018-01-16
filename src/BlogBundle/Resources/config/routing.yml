@@ -14,7 +14,7 @@ category_list:
 
 article_create:
     path: /article/create
-    defaults: { _controller: BlogBundle:Article:create }
+    defaults: { _controller: BlogBundle:Article:create, id: null }
 
 article_delete:
     path: /article/{id}/delete
@@ -22,3 +22,7 @@ article_delete:
     methods: [POST]
     requirements:
         id: \d+
+
+article_edit:
+    path: /article/{id}/edit
+    defaults: { _controller: BlogBundle:Article:create, id: null }
