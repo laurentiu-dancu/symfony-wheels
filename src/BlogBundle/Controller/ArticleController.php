@@ -98,7 +98,8 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $em->remove($article);
+        $article->setDeleted(true);
+        $em->persist($article);
         $em->flush();
 
         return $this->redirectToRoute('blog_homepage');

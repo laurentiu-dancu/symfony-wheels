@@ -26,6 +26,9 @@ BlogBundle\Entity\Article:
         updatedAt:
             type: datetime
             nullable: true
+        deleted:
+            type: boolean
+            nullable: true
     lifecycleCallbacks:
         prePersist: [setCreatedAtValue, setUpdatedAtValue]
         preUpdate: [setUpdatedAtValue]

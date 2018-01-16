@@ -30,6 +30,30 @@ class Article
     private $image;
 
     /**
+     * @var boolean
+     */
+    private $deleted;
+
+    /**
+     * @return bool
+     */
+    public function isDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * @param bool $deleted
+     * @return Article
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
      * Get id
      *
      * @return int

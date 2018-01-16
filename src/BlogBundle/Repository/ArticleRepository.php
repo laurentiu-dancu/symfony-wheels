@@ -20,6 +20,7 @@ class ArticleRepository extends EntityRepository
             $qb = $qb->where('a.category = :categoryId')
                 ->setParameter('categoryId', $categoryId);
         }
+        $qb = $qb->orWhere('a.deleted <> 1')->orWhere('a.deleted IS NULL');
         $qb->setFirstResult($firstResult)
             ->setMaxResults($limit);
 
@@ -39,6 +40,7 @@ class ArticleRepository extends EntityRepository
             $qb = $qb->where('a.category = :categoryId')
                 ->setParameter('categoryId', $categoryId);
         }
+        $qb = $qb->orWhere('a.deleted <> 1')->orWhere('a.deleted IS NULL');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
