@@ -20,6 +20,20 @@ class ContactController extends Controller
             $em->persist($contact);
             $em->flush();
 
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Wheels Contact Email')
+                ->setFrom($contact->getEmail())
+                ->setTo('laue.dancu' . '@' . 'gmail.com')
+                ->setBody(
+                    $this->renderView(
+                        '@Blog/Emails/contact.html.twig',
+                        array('contact' => $contact)
+                    ),
+                    'text/html'
+                );
+
+            $this->get('mailer')->send($message);
+
             return $this->redirectToRoute('blog_homepage');
         }
 
