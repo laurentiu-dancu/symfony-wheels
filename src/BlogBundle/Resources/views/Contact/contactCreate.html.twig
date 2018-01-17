@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="jumbotron">
+        {{ form_start(form) }}
+
+        {{ form_label(form.firstName) }}
+        {{ form_widget(form.firstName) }}
+        {{ form_errors(form.firstName) }}
+
+        {{ form_label(form.lastName) }}
+        {{ form_widget(form.lastName) }}
+        {{ form_errors(form.lastName) }}
+
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        {{ form_errors(form.email) }}
+
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content, {'attr': {'rows': 5}}) }}
+        {{ form_errors(form.content) }}
+
+        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_widget(form._token) }}
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -26,3 +26,7 @@ article_delete:
 article_edit:
     path: /article/{id}/edit
     defaults: { _controller: BlogBundle:Article:create, id: null }
+
+contact_create:
+    path: /contact
+    defaults: { _controller: BlogBundle:Contact:create}

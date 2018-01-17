@@ -167,4 +167,14 @@ class Article
         return $this->category;
     }
 
+
+    /**
+     * Get deleted
+     *
+     * @return boolean
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
 }

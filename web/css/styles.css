@@ -1,8 +1,11 @@
 #main-container {
-    background: rgba(220, 220, 220, 0.8);
-    margin: 0 16px;
-    border-radius: 3px;
-    max-width: 980px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    max-width: 1240px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .images-container {
@@ -29,14 +32,28 @@
     top: 10px;
     left: 0;
     position: relative;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 60px;
     right: 0;
     z-index: 2;
-    padding: 0 0 20px;
+    padding: 16px;
+    max-width: 1280px;
+    display: block;
 }
 
 .form-inline {
     display: inline-flex;
+}
+
+.navbar-default {
+    margin-bottom: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1240px;
+}
+
+.jumbotron {
+    background-color: transparent;
 }
