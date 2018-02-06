@@ -1,0 +1,43 @@
+BlogBundle\Entity\Comment:
+    type: entity
+    table: null
+    repositoryClass: BlogBundle\Repository\CommentRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        content:
+            type: text
+            nullable: true
+        createdAt:
+            type: datetime
+            nullable: true
+        updatedAt:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks:
+        prePersist: [setCreatedAtValue, setUpdatedAtValue]
+        preUpdate: [setUpdatedAtValue]
+
+    manyToOne:
+        article:
+            targetEntity: BlogBundle\Entity\Article
+            inversedBy: comments
+            joinColumn:
+                name: article_id
+                referencedColumnName: id
+        user:
+            targetEntity: BlogBundle\Entity\User
+            inversedBy: comments
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        parent:
+            targetEntity: BlogBundle\Entity\Comment
+            inversedBy: comments
+            joinColumn:
+                name: parent_id
+                referencedColumnName: id

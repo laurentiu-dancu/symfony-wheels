@@ -74,7 +74,7 @@ class Article
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = utf8_encode($title);
 
         return $this;
     }
@@ -86,7 +86,7 @@ class Article
      */
     public function getTitle()
     {
-        return $this->title;
+        return utf8_decode($this->title);
     }
 
     /**
@@ -98,7 +98,7 @@ class Article
      */
     public function setContent($content)
     {
-        $this->content = $content;
+        $this->content = utf8_encode($content);
 
         return $this;
     }
@@ -110,7 +110,7 @@ class Article
      */
     public function getContent()
     {
-        return $this->content;
+        return utf8_decode($this->content);
     }
 
     /**
