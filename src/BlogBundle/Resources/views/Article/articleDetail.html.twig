@@ -8,9 +8,14 @@
         <p>{{ article.content }}</p>
         <div class="form-inline">
             <a href="{{ path('article_edit', {id: article.id}) }}" class="btn btn-primary">Edit</a>
-            <form action="{{ path('article_delete', {id: article.id}) }}" method="post">
-                <input type="submit" class="btn btn-danger delete-btn" value="Delet"/>
-            </form>
+            {% if is_granted(expression(
+            '"ROLE_ADMIN" in roles'
+            )) %}
+                <form action="{{ path('article_delete', {id: article.id}) }}" method="post">
+                    <input type="submit" class="btn btn-danger delete-btn" value="Delet"/>
+                </form>
+            {% endif %}
+
         </div>
     </div>
 {% endblock %}

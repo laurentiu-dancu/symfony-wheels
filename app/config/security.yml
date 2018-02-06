@@ -43,3 +43,9 @@ security:
             cost: 12
         BlogBundle\Entity\User:
             algorithm: bcrypt
+    access_control:
+        - { path: ^/article/create, role: [ ROLE_USER, ROLE_ADMIN ] }
+        - { path: ^/article/delete, role: [ ROLE_ADMIN ] }
+    role_hierarchy:
+        ROLE_ADMIN:      [ ROLE_USER ]
+        ROLE_SUPERADMIN: [ ROLE_ADMIN ]
