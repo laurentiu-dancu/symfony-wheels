@@ -13,6 +13,13 @@
             <a class="navbar-brand" href="{{ path('article_create') }}">New article</a>
             <a class="navbar-brand" href="{{ path('contact_create') }}">Contact</a>
         </div>
+        <div class="navbar-right">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a class="nav navbar-brand navbar-right" href="{{ path('logout') }}">Logout, {{ app.user.username }}</a>
+            {% else %}
+                <a class="nav navbar-brand navbar-right" href="{{ path('login') }}">Login</a>
+            {% endif %}
+        </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 {{ render(controller('BlogBundle:Category:_categoryMenu')) }}

@@ -57,3 +57,17 @@
 .jumbotron {
     background-color: transparent;
 }
+
+.navbar-right {
+    padding-right: 15px;
+}
+
+/* DO __NOT__ UNDER __ANY__ CIRCUMSTANCES UNCOMMENT THIS */
+/*a, img, div {*/
+    /*transition: all 0.5s ease;*/
+/*}*/
+
+/*a:hover, img:hover, div:hover {*/
+    /*transform: rotate(360deg);*/
+    /*z-index: 1000;*/
+/*}*/

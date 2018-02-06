@@ -49,26 +49,30 @@ function doShiftColor(element, degree) {
 }
 
 function floatAround() {
+    var background = document.getElementById("background-image");
     var main = document.getElementById('main-container');
+    var date = new Date();
+    var time = date.getTime();
+    var seed = time / interval % 360;
 
-    doFloatAround(main, 0);
+    doFloatAround(background, seed);
 }
 
 function doFloatAround(element, seed) {
-    var x = Math.sin(seed);
-    var y = Math.cos(seed);
 
-    element.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+    var x = Math.sin(seed) * 1.6;
+    element.style.transform = 'skewY('+ x +'deg) translateY(-100px)';
+    console.log(element);
 
     setTimeout(function () {
-        doFloatAround(element, seed + 0.6)
+        doFloatAround(element, seed + interval / 5000)
     }, 20);
 }
 
 function initApp() {
     BLOG.registerDeleteConfirmation();
     BLOG.colorShift();
-    // floatAround();
+    floatAround();
 }
 
 document.onreadystatechange = function () {

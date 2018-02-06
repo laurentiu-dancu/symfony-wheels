@@ -5,7 +5,14 @@ security:
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    plebe:
+                        password: $2y$12$SEpllWYDozyZLprTBCQhtulkMrer4ID9sRPXafHp8AiUgQKOmjYoy
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: $2y$12$iOWi8Uan90x0df3m.PZ1cO9OZ57mk5NHc1G6L2fBCvtOt.QHB9iGi
+                        roles: 'ROLE_ADMIN'
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,10 +22,14 @@ security:
 
         main:
             anonymous: ~
-            # activate different ways to authenticate
-
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+            pattern: ^/
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            logout:
+                path: /logout
+                target: /
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12

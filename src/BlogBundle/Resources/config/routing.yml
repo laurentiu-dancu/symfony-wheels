@@ -30,3 +30,13 @@ article_edit:
 contact_create:
     path: /contact
     defaults: { _controller: BlogBundle:Contact:create}
+
+login:
+    path: /login
+    defaults: { _controller: BlogBundle:Security:login }
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
