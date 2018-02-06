@@ -17,5 +17,39 @@
             {% endif %}
 
         </div>
+        <div>
+            <h3>Comments:</h3>
+            {% import _self as macros %}
+            {% for comment in article.comments %}
+                {% if not comment.parent %}
+                    {{ macros.child_comment(comment, 0) }}
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
+{% macro child_comment(comment, level) %}
+    {% import _self as macrosRoot %}
+
+    {{ macrosRoot.comment_block(comment, level) }}
+
+    {% if comment.children|length > 0 %}
+        {% for child in comment.children %}
+            {% set newLevel = level + 1 %}
+            {{ macrosRoot.child_comment(child, newLevel) }}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro comment_block(comment, level) %}
+    {% set margin = 15 + level * 50 %}
+    <div style="margin-left: {{ margin }}px">
+        <h5>
+            {{ comment.user.username }}, on {{ comment.createdAt|date }}
+        </h5>
+        <p class="comment-content">
+            {{ comment.content }}
+        </p>
+        <hr/>
+    </div>
+{% endmacro %}

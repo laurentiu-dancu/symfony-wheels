@@ -85,31 +85,31 @@ class Fixtures extends Fixture {
         foreach ($this->articles as $key => $articleArray) {
             $article = new Article();
             $article->setCategory($categories[$articleArray[0]]);
-            $article->setTitle(utf8_encode($articleArray[1]));
-            $article->setContent(utf8_encode($articleArray[2]));
+            $article->setTitle($articleArray[1]);
+            $article->setContent($articleArray[2]);
             $article->setImage($articleArray[3]);
             $manager->persist($article);
 
             foreach ($this->commentsLevel1 as $l1key => $commentArray) {
-                if ($key % 2 == $l1key % 2) {
+                if (rand(0, 1)) {
                     $comment = new Comment();
-                    $comment->setContent(utf8_encode($commentArray[0]));
+                    $comment->setContent($commentArray[0]);
                     $comment->setArticle($article);
                     $comment->setUser($userContainer[($l1key * 17) % count($userContainer)]);
                     $manager->persist($comment);
 
                     foreach ($this->commentsLevel2 as $l2key => $commentArray2) {
-                        if ($key % 3 == $l2key % 2) {
+                        if (rand(0, 1) && rand(0, 2)) {
                             $comment2 = new Comment();
-                            $comment2->setContent(utf8_encode($commentArray2[0]));
+                            $comment2->setContent($commentArray2[0]);
                             $comment2->setArticle($article);
                             $comment2->setParent($comment);
                             $comment2->setUser($userContainer[($l1key + $l2key * 3) % count($userContainer)]);
                             $manager->persist($comment2);
                             foreach ($this->commentsLevel3 as $l3key => $commentArray3) {
-                                if ($key % 2 == $l3key % 3) {
+                                if (rand(0, 1) && rand(0, 1)) {
                                     $comment3 = new Comment();
-                                    $comment3->setContent(utf8_encode($commentArray3[0]));
+                                    $comment3->setContent($commentArray3[0]);
                                     $comment3->setParent($comment2);
                                     $comment3->setArticle($article);
                                     $comment3->setUser(

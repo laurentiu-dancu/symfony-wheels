@@ -33,3 +33,8 @@ BlogBundle\Entity\User:
         roles:
             type: array
     lifecycleCallbacks: {  }
+
+    oneToMany:
+        comments:
+            targetEntity: BlogBundle\Entity\Comment
+            mappedBy: user

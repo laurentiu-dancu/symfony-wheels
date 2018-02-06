@@ -37,7 +37,13 @@ BlogBundle\Entity\Comment:
                 referencedColumnName: id
         parent:
             targetEntity: BlogBundle\Entity\Comment
-            inversedBy: comments
+            inversedBy: children
             joinColumn:
                 name: parent_id
                 referencedColumnName: id
+
+    oneToMany:
+        children:
+            targetEntity: BlogBundle\Entity\Comment
+            mappedBy: parent
+            fetch: EAGER

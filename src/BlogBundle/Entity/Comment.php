@@ -199,5 +199,50 @@ class Comment
         return $this->parent;
     }
 
-}
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $children;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add child
+     *
+     * @param \BlogBundle\Entity\Comment $child
+     *
+     * @return Comment
+     */
+    public function addChild(\BlogBundle\Entity\Comment $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param \BlogBundle\Entity\Comment $child
+     */
+    public function removeChild(\BlogBundle\Entity\Comment $child)
+    {
+        $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+}
