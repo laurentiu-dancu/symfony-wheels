@@ -72,7 +72,7 @@ function doFloatAround(element, seed) {
 function initApp() {
     BLOG.registerDeleteConfirmation();
     BLOG.colorShift();
-    floatAround();
+    // floatAround();
 }
 
 document.onreadystatechange = function () {

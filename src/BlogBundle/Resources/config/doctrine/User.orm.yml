@@ -19,9 +19,11 @@ BlogBundle\Entity\User:
         email:
             type: string
             length: 255
-            nullable: true
+            nullable: false
         password:
             type: string
             length: 255
-            nullable: true
+            nullable: false
+        roles:
+            type: array
     lifecycleCallbacks: {  }

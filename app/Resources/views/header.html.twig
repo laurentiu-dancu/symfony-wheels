@@ -15,9 +15,10 @@
         </div>
         <div class="navbar-right">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="nav navbar-brand navbar-right" href="{{ path('logout') }}">Logout, {{ app.user.username }}</a>
+                <a class="nav navbar-brand navbar-right" href="{{ path('logout') }}">Logout, {{ app.user.firstname }}</a>
             {% else %}
                 <a class="nav navbar-brand navbar-right" href="{{ path('login') }}">Login</a>
+                <a class="nav navbar-brand navbar-right" href="{{ path('register') }}">Register</a>
             {% endif %}
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

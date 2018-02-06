@@ -4,6 +4,9 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        chain_provider:
+                chain:
+                    providers: [in_memory, user_db]
         in_memory:
             memory:
                 users:
@@ -13,6 +16,8 @@ security:
                     admin:
                         password: $2y$12$iOWi8Uan90x0df3m.PZ1cO9OZ57mk5NHc1G6L2fBCvtOt.QHB9iGi
                         roles: 'ROLE_ADMIN'
+        user_db:
+            entity: { class: BlogBundle\Entity\User, property : 'email' }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -33,3 +38,5 @@ security:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
             cost: 12
+        BlogBundle\Entity\User:
+            algorithm: bcrypt
