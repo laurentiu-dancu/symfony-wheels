@@ -8,6 +8,20 @@ BlogBundle\Entity\User:
             generator:
                 strategy: AUTO
     fields:
+        username:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        email:
+            type: string
+            length: 255
+            nullable: false
+            unique: true
+        password:
+            type: string
+            length: 255
+            nullable: false
         firstName:
             type: string
             length: 255
@@ -16,14 +30,6 @@ BlogBundle\Entity\User:
             type: string
             length: 255
             nullable: true
-        email:
-            type: string
-            length: 255
-            nullable: false
-        password:
-            type: string
-            length: 255
-            nullable: false
         roles:
             type: array
     lifecycleCallbacks: {  }

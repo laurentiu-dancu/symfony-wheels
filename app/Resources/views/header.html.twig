@@ -15,7 +15,7 @@
         </div>
         <div class="navbar-right">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="nav navbar-brand navbar-right" href="{{ path('logout') }}">Logout, {{ app.user.firstname }}</a>
+                <a class="nav navbar-brand navbar-right" href="{{ path('logout') }}">Logout, {{ app.user.username }}</a>
             {% else %}
                 <a class="nav navbar-brand navbar-right" href="{{ path('login') }}">Login</a>
                 <a class="nav navbar-brand navbar-right" href="{{ path('register') }}">Register</a>
