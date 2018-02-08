@@ -19,12 +19,44 @@
         </div>
         <div>
             <h3>Comments:</h3>
+            {% if article.comments.count > 0 %}
             {% import _self as macros %}
             {% for comment in article.comments %}
                 {% if not comment.parent %}
                     {{ macros.child_comment(comment, 0) }}
                 {% endif %}
             {% endfor %}
+            {% else %}
+                <p class="comment-content">
+                    Nothing here.
+                </p>
+            {% endif %}
+            <button class="btn btn-success btn-lg reply-btn">Comment to article</button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Reply</h4>
+                </div>
+                {{ form_start(form) }}
+                <form method="post" action="{{ path('article_detail', {id: article.id }) }}">
+                    <div class="modal-body">
+                        {{ form_row(form.content) }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                    {{ form_row(form.parentId) }}
+                    {{ form_row(form._token) }}
+                </form>
+                {{ form_end(form) }}
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -43,13 +75,16 @@
 
 {% macro comment_block(comment, level) %}
     {% set margin = 15 + level * 50 %}
-    <div style="margin-left: {{ margin }}px">
+    <div style="margin-left: {{ margin }}px" class="comment-details" data-id="{{ comment.id }}">
         <h5>
-            {{ comment.user.username }}, on {{ comment.createdAt|date }}
+            {{ comment.user }}, on {{ comment.createdAt|date }}
         </h5>
         <p class="comment-content">
             {{ comment.content }}
         </p>
+        <button type="button" class="btn btn-primary btn-xs reply-btn">
+            Reply
+        </button>
         <hr/>
     </div>
 {% endmacro %}

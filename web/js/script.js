@@ -23,6 +23,27 @@ BLOG.registerDeleteConfirmation = function() {
     });
 };
 
+BLOG.handleCommentSubmit = function() {
+    var $replyButtons = $('.reply-btn');
+    if ($replyButtons.length == 0) {
+        return;
+    }
+
+    $replyButtons.on('click', function(event) {
+        // trigger modal
+        $('#myModal').modal({});
+        // get the pressed button element from the event
+        var $btn = $(event.currentTarget);
+        // find comment main block, which hold's the id of the comment the user wants to reply
+        var $commentRoot = $btn.parents('.comment-details');
+        // if there is no such a parent, we're trying to reply directly to the article
+        var commentIdToReply = $commentRoot.length > 0 ? $commentRoot.data('id') : null;
+
+        // update the parent Id hidden input's value
+        $('#comment_parentId').val(commentIdToReply);
+    });
+};
+
 
 var interval = 120;
 var variation = 1;
@@ -71,7 +92,8 @@ function doFloatAround(element, seed) {
 
 function initApp() {
     BLOG.registerDeleteConfirmation();
-    BLOG.colorShift();
+    BLOG.handleCommentSubmit();
+    // BLOG.colorShift();
     // floatAround();
 }
 

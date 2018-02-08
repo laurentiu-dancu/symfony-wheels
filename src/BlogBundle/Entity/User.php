@@ -279,4 +279,9 @@ class User implements UserInterface
     {
         return $this->comments;
     }
+
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
 }

@@ -199,6 +199,13 @@ class Comment
         return $this->parent;
     }
 
+    public function getParentId() {
+        if (empty($this->parent)) {
+            return NULL;
+        }
+        return $this->parent->id;
+    }
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */

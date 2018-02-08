@@ -13,6 +13,11 @@
         <div id="background-image"></div>
         <div class="content">
             {{ include('header.html.twig') }}
+            {% for flash_message in app.session.flashBag.get('notice') %}
+                <div class="flash-notice alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
             <div id="main-container" class="container-fluid">
                 {% block body %}{% endblock %}
             </div>

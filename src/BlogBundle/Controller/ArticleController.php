@@ -4,7 +4,9 @@ namespace BlogBundle\Controller;
 
 use BlogBundle\Entity\Article;
 use BlogBundle\Entity\ArticleCategory;
+use BlogBundle\Entity\Comment;
 use BlogBundle\Form\ArticleType;
+use BlogBundle\Form\CommentType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -54,10 +56,38 @@ class ArticleController extends Controller
         );
     }
 
-    public function detailAction(Article $article)
+    public function detailAction(Request $request, Article $article)
     {
+        $comment = new Comment();
+        $form = $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $parentId = $form->get('parentId')->getData();
+            if ($parentId) {
+                $parent = $em->find(Comment::class, $parentId);
+                $comment->setParent($parent);
+            }
+            $user = $request->getUser();
+            if ($user) {
+                $comment->setUser($user);
+            }
+            $comment->setArticle($article);
+
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Your comment was saved!'
+            );
+
+            return $this->redirectToRoute('article_detail', ['id' => $article->getId()]);
+        }
+
         return $this->render('@Blog/Article/articleDetail.html.twig', [
-            'article' => $article
+            'article' => $article,
+            'form' => $form->createView(),
         ]);
     }
 
