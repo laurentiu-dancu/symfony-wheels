@@ -1,4 +1,8 @@
 {
+  "name": "symfony-wheels",
+  "version": "0.0.1",
+  "description": "Symfony+React Wheels!",
+  "main": "app.js",
   "devDependencies": {
     "@symfony/webpack-encore": "^0.17.1",
     "babel-preset-react": "^6.24.1",
@@ -14,6 +18,14 @@
     "bootstrap": "^4.0.0",
     "jquery": "^3.3.1",
     "popper": "^1.0.1",
-    "popper.js": "^1.12.9"
+    "popper.js": "^1.12.9",
+    "react-router-dom": "latest",
+    "react-on-rails": "latest"
+  },
+  "scripts": {
+    "webpack-serverside": "encore dev --config webpack.config.serverside.js --watch",
+    "webpack-dev": "encore dev-server",
+    "webpack": "encore dev",
+    "webpack-watch": "encore dev --watch"
   }
 }

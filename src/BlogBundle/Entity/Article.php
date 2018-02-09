@@ -2,10 +2,12 @@
 
 namespace BlogBundle\Entity;
 
+use JsonSerializable;
+
 /**
  * Article
  */
-class Article
+class Article implements JsonSerializable
 {
     use TimeStampLoggerTrait;
 
@@ -222,5 +224,22 @@ class Article
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    function jsonSerialize()
+    {
+        return [
+            'title' => $this->getTitle(),
+            'id' => $this->getId(),
+            'content' => $this->getContent(),
+            'image' => $this->getImage(),
+        ];
     }
 }

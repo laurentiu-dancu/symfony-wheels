@@ -31,3 +31,4 @@
 # node files
 /node_modules
 /web/build
+/app/Resources/webpack

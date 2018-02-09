@@ -3,17 +3,12 @@
 namespace BlogBundle\Controller;
 
 use BlogBundle\Entity\Article;
-use BlogBundle\Entity\ArticleCategory;
-use BlogBundle\Entity\Comment;
 use BlogBundle\Form\ArticleType;
-use BlogBundle\Form\CommentType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class ArticleController extends Controller
 {
@@ -40,12 +35,19 @@ class ArticleController extends Controller
 
         $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
 
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new JsonSerializableNormalizer];
+        $serializer = new Serializer($normalizers, $encoders);
+
         $articles = $repo->getPaginated($currentPageNr, $currentPageLimit);
+        $jsonArticles = $serializer->normalize(['articles' => $articles]);
+        // End react stuff.
 
         return $this->render(
-            '@Blog/Article/articleList.html.twig',
+            '@Blog/Article/articleListReact.html.twig',
             [
                 'articles' => $articles,
+                'props' => $jsonArticles,
                 'currentLimit' => $currentPageLimit,
                 'limits' => static::PAGINATION_LIMITS,
                 'currentPage' => $currentPageNr,
@@ -58,36 +60,45 @@ class ArticleController extends Controller
 
     public function detailAction(Request $request, Article $article)
     {
-        $comment = new Comment();
-        $form = $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $parentId = $form->get('parentId')->getData();
-            if ($parentId) {
-                $parent = $em->find(Comment::class, $parentId);
-                $comment->setParent($parent);
-            }
-            $user = $request->getUser();
-            if ($user) {
-                $comment->setUser($user);
-            }
-            $comment->setArticle($article);
+//        $comment = new Comment();
+//        $form = $form = $this->createForm(CommentType::class, $comment);
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $parentId = $form->get('parentId')->getData();
+//            if ($parentId) {
+//                $parent = $em->find(Comment::class, $parentId);
+//                $comment->setParent($parent);
+//            }
+//            $user = $request->getUser();
+//            if ($user) {
+//                $comment->setUser($user);
+//            }
+//            $comment->setArticle($article);
+//
+//            $em->persist($comment);
+//            $em->flush();
+//
+//            $this->addFlash(
+//                'notice',
+//                'Your comment was saved!'
+//            );
+//
+//            return $this->redirectToRoute('article_detail', ['id' => $article->getId()]);
+//        }
 
-            $em->persist($comment);
-            $em->flush();
+//        return $this->render('@Blog/Article/articleDetail.html.twig', [
+//            'article' => $article,
+//            'form' => $form->createView(),
+//        ]);
+        $normalizer = new JsonSerializableNormalizer();
+        $encoders = [new JsonEncoder()];
+        $normalizers = [$normalizer];
+        $serializer = new Serializer($normalizers, $encoders);
+        $jsonArticle = $serializer->normalize($article);
 
-            $this->addFlash(
-                'notice',
-                'Your comment was saved!'
-            );
-
-            return $this->redirectToRoute('article_detail', ['id' => $article->getId()]);
-        }
-
-        return $this->render('@Blog/Article/articleDetail.html.twig', [
-            'article' => $article,
-            'form' => $form->createView(),
+        return $this->render('@Blog/Article/articleDetailReact.html.twig', [
+            'props' => ['article' => $jsonArticle],
         ]);
     }
 

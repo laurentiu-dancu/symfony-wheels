@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        {{ react_component('ArticlesApp', {'props': props}) }}
+    </div>
+
+    {{ include('@Blog/Pagination/_pagination.html.twig') }}
+
+{% endblock %}

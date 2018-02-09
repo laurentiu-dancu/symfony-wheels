@@ -1,1 +1,1 @@
-require('./oldschool');
+import "./article/startup/registration";
