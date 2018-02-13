@@ -2,6 +2,8 @@
 
 namespace BlogBundle\Entity;
 
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * Comment
  */
@@ -41,6 +43,7 @@ class Comment
 
     /**
      * @var \BlogBundle\Entity\Comment
+     * @Serializer\Exclude()
      */
     private $parent;
 

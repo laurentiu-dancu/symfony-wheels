@@ -2,6 +2,8 @@
 
 namespace BlogBundle\Entity;
 
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * ArticleCategory
  */
@@ -18,6 +20,11 @@ class ArticleCategory
      * @var string
      */
     private $name;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $articles;
 
     /**
      * Get id
@@ -52,11 +59,6 @@ class ArticleCategory
     {
         return $this->name;
     }
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $articles;
 
     /**
      * Constructor

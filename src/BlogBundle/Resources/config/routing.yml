@@ -45,14 +45,7 @@ register:
     path: /register
     defaults: { _controller: BlogBundle:Security:register }
 
-api_article:
-    path: /api/article/{id}
-    defaults: { _controller: BlogBundle:Api:apiArticle }
-    requirements:
-        id: \d+
-
-api_articles:
-    path: /api/articles
-    defaults: { _controller: BlogBundle:Api:apiArticles }
-    requirements:
-        id: \d+
+rest_controller:
+    type: rest
+    resource: BlogBundle\Controller\RestController
+    prefix: /api

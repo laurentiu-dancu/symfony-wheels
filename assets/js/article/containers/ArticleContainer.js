@@ -22,7 +22,7 @@ export default class ArticleContainer extends React.Component {
     }
     componentDidMount() {
         if (this.state.loading) {
-            fetch(this.props.base + '/api/article/' + this.props.match.params.id).then((response) => {
+            fetch(this.props.base + '/api/articles/' + this.props.match.params.id).then((response) => {
                 return response.json()
             }).then((data) => {
                 this.setState({

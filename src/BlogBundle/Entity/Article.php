@@ -3,9 +3,12 @@
 namespace BlogBundle\Entity;
 
 use JsonSerializable;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Article
+ *
+ * @Serializer\ExclusionPolicy("none")
  */
 class Article implements JsonSerializable
 {
@@ -37,6 +40,17 @@ class Article implements JsonSerializable
      * @var boolean
      */
     private $deleted;
+
+    /**
+     * @var \BlogBundle\Entity\ArticleCategory
+     */
+    private $category;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * @Serializer\Groups({"detail"})
+     */
+    private $comments;
 
     /**
      * @return bool
@@ -139,11 +153,6 @@ class Article implements JsonSerializable
         return $this->image;
     }
 
-    /**
-     * @var \BlogBundle\Entity\ArticleCategory
-     */
-    private $category;
-
 
     /**
      * Set category
@@ -179,10 +188,6 @@ class Article implements JsonSerializable
     {
         return $this->deleted;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $comments;
 
     /**
      * Constructor

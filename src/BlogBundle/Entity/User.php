@@ -3,6 +3,7 @@
 namespace BlogBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * User
@@ -46,8 +47,15 @@ class User implements UserInterface
 
     /**
      * @var string
+     * @Serializer\Exclude()
      */
     private $plainPassword;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * @Serializer\Exclude()
+     */
+    private $comments;
 
     /**
      * Get id
@@ -233,10 +241,6 @@ class User implements UserInterface
 
         return $this;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $comments;
 
     /**
      * Constructor
