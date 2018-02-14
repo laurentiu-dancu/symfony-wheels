@@ -37,7 +37,7 @@ class ContactController extends Controller
             return $this->redirectToRoute('blog_homepage');
         }
 
-        return $this->render('@Blog/Contact/contactCreate.html.twig', [
+        return $this->render('@Blog/Contact/contactCreateReact.html.twig', [
             'form' => $form->createView()
         ]);
     }
