@@ -8,10 +8,25 @@ use BlogBundle\Entity\Contact;
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\View\ViewHandler;
+use FOS\RestBundle\View\ViewHandlerInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Annotations;
 
 class RestController extends FOSRestController {
+
+    /**
+     * RestController constructor.
+     *
+     * @param Container $container
+     * @param ViewHandlerInterface $viewHandler
+     */
+    public function __construct(Container $container, ViewHandlerInterface $viewHandler) {
+        $this->setContainer($container);
+        $this->setViewHandler($viewHandler);
+    }
+
     public function getCategoriesAction() {
         $repo = $this->getDoctrine()->getManager()->getRepository(ArticleCategory::class);
         $data = $repo->findAll();
@@ -20,6 +35,7 @@ class RestController extends FOSRestController {
 
         $context->addGroups(['Default']);
         $view->setContext($context);
+        $view->setFormat('json');
 
         return $this->handleView($view);
     }
@@ -35,6 +51,7 @@ class RestController extends FOSRestController {
 
         $context->addGroups(['Default']);
         $view->setContext($context);
+        $view->setFormat('json');
 
         return $this->handleView($view);
     }
@@ -50,6 +67,7 @@ class RestController extends FOSRestController {
 
         $context->addGroups(['Default', 'detail']);
         $view->setContext($context);
+        $view->setFormat('json');
 
         return $this->handleView($view);
     }

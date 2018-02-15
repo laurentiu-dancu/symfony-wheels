@@ -38,7 +38,8 @@ class ContactController extends Controller
         }
 
         return $this->render('@Blog/Contact/contactCreateReact.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'props' => [],
         ]);
     }
 

@@ -17,45 +17,50 @@ class ArticleController extends Controller
 
     public function indexAction(Request $request)
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
+        $restController = $this->get(RestController::class);
+        $articles_response = $restController->getArticlesAction($request);
+        $articles = json_decode($articles_response->getContent());
 
-        $currentPageNr = $request->query->getInt('page', 1);
-        $currentPageLimit = $request->query->getInt('limit', static::PAGINATION_LIMITS[1]);
-
-        if (!in_array($currentPageLimit, static::PAGINATION_LIMITS)) {
-            return $this->redirectToRoute('blog_homepage');
-        }
-
-        $totalPages = ceil($repo->countArticles() / $currentPageLimit);
-
-        if ($currentPageNr < 1 || $currentPageNr > $totalPages) {
-            return $this->redirectToRoute('blog_homepage');
-        }
-
-
-        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
-
-        $encoders = [new JsonEncoder()];
-        $normalizers = [new JsonSerializableNormalizer];
-        $serializer = new Serializer($normalizers, $encoders);
-
-        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit);
-        $jsonArticles = $serializer->normalize(['articles' => $articles]);
-        // End react stuff.
-
-        return $this->render(
-            '@Blog/Article/articleListReact.html.twig',
-            [
-                'articles' => $articles,
-                'props' => $jsonArticles,
-                'currentLimit' => $currentPageLimit,
-                'limits' => static::PAGINATION_LIMITS,
-                'currentPage' => $currentPageNr,
-                'totalPages' => $totalPages,
-                'paginationRouteName' => 'blog_homepage',
-                'paginationRouteParams' => [],
-            ]
-        );
+        return $this->render('base.html.twig', ['props' => ['articles' => $articles]]);
+//        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
+//
+//        $currentPageNr = $request->query->getInt('page', 1);
+//        $currentPageLimit = $request->query->getInt('limit', static::PAGINATION_LIMITS[1]);
+//
+//        if (!in_array($currentPageLimit, static::PAGINATION_LIMITS)) {
+//            return $this->redirectToRoute('blog_homepage');
+//        }
+//
+//        $totalPages = ceil($repo->countArticles() / $currentPageLimit);
+//
+//        if ($currentPageNr < 1 || $currentPageNr > $totalPages) {
+//            return $this->redirectToRoute('blog_homepage');
+//        }
+//
+//
+//        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
+//
+//        $encoders = [new JsonEncoder()];
+//        $normalizers = [new JsonSerializableNormalizer];
+//        $serializer = new Serializer($normalizers, $encoders);
+//
+//        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit);
+//        $jsonArticles = $serializer->normalize(['articles' => $articles]);
+//        // End react stuff.
+//
+//        return $this->render(
+//            '@Blog/Article/articleListReact.html.twig',
+//            [
+//                'articles' => $articles,
+//                'props' => $jsonArticles,
+//                'currentLimit' => $currentPageLimit,
+//                'limits' => static::PAGINATION_LIMITS,
+//                'currentPage' => $currentPageNr,
+//                'totalPages' => $totalPages,
+//                'paginationRouteName' => 'blog_homepage',
+//                'paginationRouteParams' => [],
+//            ]
+//        );
     }
 
     public function detailAction(Request $request, Article $article)
@@ -91,14 +96,12 @@ class ArticleController extends Controller
 //            'article' => $article,
 //            'form' => $form->createView(),
 //        ]);
-        $normalizer = new JsonSerializableNormalizer();
-        $encoders = [new JsonEncoder()];
-        $normalizers = [$normalizer];
-        $serializer = new Serializer($normalizers, $encoders);
-        $jsonArticle = $serializer->normalize($article);
+        $restController = $this->get(RestController::class);
+        $articles_response = $restController->getArticleAction($article);
+        $article = json_decode($articles_response->getContent());
 
-        return $this->render('@Blog/Article/articleDetailReact.html.twig', [
-            'props' => ['article' => $jsonArticle],
+        return $this->render('base.html.twig', [
+            'props' => ['article' => $article],
         ]);
     }
 

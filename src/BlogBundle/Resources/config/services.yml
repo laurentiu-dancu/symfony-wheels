@@ -5,3 +5,7 @@ services:
 # Fixtures services
     BlogBundle\DataFixtures\ORM\Fixtures:
         tags: [doctrine.fixture.orm]
+
+    BlogBundle\Controller\RestController:
+        arguments: ["@service_container", "@fos_rest.view_handler.default"]
+        public: true
