@@ -102,7 +102,6 @@ class Fixtures extends Fixture {
                         if (rand(0, 1) && rand(0, 2)) {
                             $comment2 = new Comment();
                             $comment2->setContent($commentArray2[0]);
-                            $comment2->setArticle($article);
                             $comment2->setParent($comment);
                             $comment2->setUser($userContainer[($l1key + $l2key * 3) % count($userContainer)]);
                             $manager->persist($comment2);
@@ -111,7 +110,6 @@ class Fixtures extends Fixture {
                                     $comment3 = new Comment();
                                     $comment3->setContent($commentArray3[0]);
                                     $comment3->setParent($comment2);
-                                    $comment3->setArticle($article);
                                     $comment3->setUser(
                                         $userContainer[($l1key + $l2key + $l3key) % count($userContainer)]
                                     );

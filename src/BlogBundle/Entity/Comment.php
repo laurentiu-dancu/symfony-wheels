@@ -140,6 +140,7 @@ class Comment
     public function setArticle(\BlogBundle\Entity\Article $article = null)
     {
         $this->article = $article;
+        $this->parent = NULL;
 
         return $this;
     }
@@ -187,7 +188,9 @@ class Comment
      */
     public function setParent(\BlogBundle\Entity\Comment $parent = null)
     {
+        // THERE CAN ONLY BE ONE;
         $this->parent = $parent;
+        $this->article = NULL;
 
         return $this;
     }
