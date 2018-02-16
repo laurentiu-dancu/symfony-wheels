@@ -8,7 +8,6 @@ export default class CommentWidget extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return(
             <div style={{marginLeft: this.state.offset + 'px'}} className="comment-details" data-id={this.state.id}>
                 <h5>
