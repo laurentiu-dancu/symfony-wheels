@@ -6,13 +6,14 @@ import {
     Route
 } from 'react-router-dom'
 import Routes from './routing';
+import Layout from './layout/Layout'
 
 const BlogApp = (initialProps, context) => {
     let Router;
 
     if (context.serverSide) {
         Router = (props) => (
-            <StaticRouter basename={context.base} location={context.location} context={{}} >
+            <StaticRouter basename={context.base} location={context.location} context={{}}>
                 {props.children}
             </StaticRouter>
         )
@@ -26,8 +27,11 @@ const BlogApp = (initialProps, context) => {
     return (
         <Router>
             <div>
-                {Routes.map(route => (
-                    <Route path={route.path} exact={route.exact} render={(props) => <route.component {...initialProps} base={context.base} {...props} />} />
+                {Routes.map((route, key) => (
+                    <Route key={key} path={route.path} exact={route.exact}
+                           render={(props) => (
+                               <Layout content={route.component} base={context.base} {...props} {...initialProps}/>
+                           )}/>
                 ))}
             </div>
         </Router>

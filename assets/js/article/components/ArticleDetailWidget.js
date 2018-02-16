@@ -7,9 +7,6 @@ const ArticleDetailWidget = (props) => (
         <hr/>
         <img src={props.article.image}/>
         <p>{ props.article.content }</p>
-        <Link to="/">
-            <p>Go back</p>
-        </Link>
     </div>
 );
 

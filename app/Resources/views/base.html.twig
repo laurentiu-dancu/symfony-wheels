@@ -12,17 +12,13 @@
         <div id="background-image"></div>
         <div class="content">
             {{ react_component('BlogApp', {'props': props}) }}
-            {#{{ include('header.html.twig') }}#}
-            {#{% for flash_message in app.session.flashBag.get('notice') %}#}
-                {#<div class="flash-notice alert alert-success" role="alert">#}
-                    {#{{ flash_message }}#}
-                {#</div>#}
-            {#{% endfor %}#}
-            {#<div id="main-container" class="container-fluid">#}
-                {#{% block body %}{% endblock %}#}
-            {#</div>#}
+        </div>
+        <div class='cancer-container'>
+            {#<iframe width="0" height="0" src="https://www.youtube.com/embed/RmJCKRJx9Dc?autoplay=1&loop=1" frameborder="0"></iframe>#}
         </div>
         <script src="{{ asset('build/app.js') }}"></script>
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+
+        {% endblock %}
     </body>
 </html>

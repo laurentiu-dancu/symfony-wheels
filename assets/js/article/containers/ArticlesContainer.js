@@ -39,9 +39,7 @@ export default class ArticleContainer extends React.Component {
             )
         } else {
             return (
-                <div>
-                    <ArticleListWidget articles={this.state.articles} routePrefix={this.props.base}/>
-                </div>
+                <ArticleListWidget articles={this.state.articles} routePrefix={this.props.base}/>
             )
         }
     }
