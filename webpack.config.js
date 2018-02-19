@@ -10,7 +10,7 @@ Encore
     .enableReactPreset()
 
     // will create web/build/app.js and web/build/app.css
-    .addEntry('app', ['babel-polyfill', 'whatwg-fetch', './assets/js/app.js', './assets/js/oldschool.js'])
+    .addEntry('app', ['babel-polyfill', 'whatwg-fetch', './assets/js/app.js'])
     .addEntry('styles', './assets/scss/styles.scss')
 
     // allow sass/scss files to be processed

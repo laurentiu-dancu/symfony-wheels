@@ -73,6 +73,19 @@
   color: saddlebrown;
 }
 
+.animation-hue-item {
+  animation-name: animation-hue-rotate;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-fill-mode: none;
+}
+
+@keyframes animation-hue-rotate {
+  from {filter: hue-rotate(0deg);}
+  to {filter: hue-rotate(360deg);}
+}
+
 ////DO __NOT__ UNDER __ANY__ CIRCUMSTANCES UNCOMMENT THIS
 //a, img, div {
 //  transition: all 0.5s ease;

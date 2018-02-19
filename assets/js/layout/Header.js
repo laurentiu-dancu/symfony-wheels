@@ -9,7 +9,7 @@ export default class Header extends React.Component {
             <div className='images-container navbar-default'>
                 <Link to="/">
                     <img src='/images/run.gif'/>
-                    <img id="logo-image" src="/images/logo.png"/>
+                    <img className="animation-hue-item" id="logo-image" src="/images/logo.png"/>
                 </Link>
             </div>
         );

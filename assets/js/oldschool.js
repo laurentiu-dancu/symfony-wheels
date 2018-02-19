@@ -47,26 +47,6 @@ BLOG.handleCommentSubmit = function() {
 
 
 let interval = 120;
-let letiation = 1;
-
-BLOG.colorShift = function() {
-    let background = document.getElementById("background-image");
-    let logo = document.getElementById('logo-image');
-
-    let seed = 0;
-    doShiftColor(background, seed);
-    doShiftColor(logo, seed);
-};
-
-function doShiftColor(element, degree) {
-    if (degree > 360) {
-        degree -= 360;
-    }
-    element.style.filter = 'hue-rotate(' + degree + 'deg)';
-    setTimeout(function () {
-        doShiftColor(element, degree + letiation)
-    }, interval);
-}
 
 function floatAround() {
     let background = document.getElementById("background-image");
@@ -91,7 +71,6 @@ function doFloatAround(element, seed) {
 function initApp() {
     BLOG.registerDeleteConfirmation();
     BLOG.handleCommentSubmit();
-    // BLOG.colorShift();
     // floatAround();
 }
 
