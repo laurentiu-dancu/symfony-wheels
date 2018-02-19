@@ -52,12 +52,10 @@ let letiation = 1;
 BLOG.colorShift = function() {
     let background = document.getElementById("background-image");
     let logo = document.getElementById('logo-image');
-    let date = new Date();
-    let time = date.getTime();
 
-    let seed = time / interval % 360;
+    let seed = 0;
     doShiftColor(background, seed);
-    // doShiftColor(logo, seed);
+    doShiftColor(logo, seed);
 };
 
 function doShiftColor(element, degree) {
@@ -84,7 +82,6 @@ function doFloatAround(element, seed) {
 
     let x = Math.sin(seed) * 1.6;
     element.style.transform = 'skewY('+ x +'deg) translateY(-100px)';
-    console.log(element);
 
     setTimeout(function () {
         doFloatAround(element, seed + interval / 5000)
@@ -94,7 +91,7 @@ function doFloatAround(element, seed) {
 function initApp() {
     BLOG.registerDeleteConfirmation();
     BLOG.handleCommentSubmit();
-    BLOG.colorShift();
+    // BLOG.colorShift();
     // floatAround();
 }
 

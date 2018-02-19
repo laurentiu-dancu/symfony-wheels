@@ -7,8 +7,7 @@ export default class ArticleContainer extends React.Component {
 
         //We check it there is no recipe (only client side)
         //Or our id doesn't match the recipe that we received server-side
-        //
-        if (!this.props.article || (this.props.match.params.id && this.props.match.params.id !== this.props.article.id)) {
+        if (!this.props.article || (this.props.match.params.id && this.props.match.params.id != this.props.article.id)) {
             this.state = {
                 article: null,
                 loading: true

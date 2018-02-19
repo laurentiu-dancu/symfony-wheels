@@ -6,7 +6,7 @@ import {
     Route
 } from 'react-router-dom'
 import Routes from './routing';
-import Layout from './layout/Layout'
+import {Header, Menu, Content, Cancer}  from './layout'
 
 const BlogApp = (initialProps, context) => {
     let Router;
@@ -26,17 +26,14 @@ const BlogApp = (initialProps, context) => {
     }
     return (
         <Router>
-            <div>
-                {Routes.map((route, key) => (
-                    <Route key={key} path={route.path} exact={route.exact}
-                           render={(props) => (
-                               <Layout content={route.component} base={context.base} {...props} {...initialProps}/>
-                           )}/>
-                ))}
+            <div className="react-router-container">
+                <Header/>
+                <Menu/>
+                <Content routes={Routes} {...context} {...initialProps} />
+                {/*<Cancer/>*/}
             </div>
         </Router>
     )
 };
 
-export default BlogApp;
 ReactOnRails.register({BlogApp});
