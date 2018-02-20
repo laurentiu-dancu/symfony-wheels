@@ -5,7 +5,14 @@
   "main": "app.js",
   "devDependencies": {
     "@symfony/webpack-encore": "^0.17.1",
-    "babel-preset-react": "^6.24.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-runtime": "^6.26.0",
     "bootstrap-sass": "^3.3.7",
     "node-sass": "^4.7.2",
     "prop-types": "^15.6.0",
@@ -15,12 +22,15 @@
     "webpack-notifier": "^1.5.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.0.0",
     "jquery": "^3.3.1",
+    "js-yaml": "^3.10.0",
     "popper": "^1.0.1",
     "popper.js": "^1.12.9",
-    "react-router-dom": "latest",
-    "react-on-rails": "latest"
+    "react-on-rails": "^10.0.1",
+    "react-router-dom": "^4.2.2",
+    "webpack": "^3.8.1"
   },
   "scripts": {
     "webpack-serverside": "encore dev --config webpack.config.serverside.js --watch",
