@@ -1,14 +1,13 @@
 import ReactOnRails from 'react-on-rails'
+import { Provider } from 'react-redux'
 import React from 'react'
-import {
-    BrowserRouter,
-    StaticRouter,
-    Route
-} from 'react-router-dom'
+import {BrowserRouter, StaticRouter} from 'react-router-dom'
+import AppStore from './store'
 import Routes from './routing';
 import {Header, Menu, Content, Cancer}  from './layout'
 
 const BlogApp = (initialProps, context) => {
+    const store = ReactOnRails.getStore('AppStore');
     let Router;
 
     if (context.serverSide) {
@@ -25,15 +24,18 @@ const BlogApp = (initialProps, context) => {
         )
     }
     return (
-        <Router>
-            <div className="react-router-container">
-                <Header/>
-                <Menu/>
-                <Content routes={Routes} {...context} {...initialProps} />
-                {/*<Cancer/>*/}
-            </div>
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <div className="react-router-container">
+                    <Header/>
+                    <Menu/>
+                    <Content routes={Routes}/>
+                    {/*<Cancer/>*/}
+                </div>
+            </Router>
+        </Provider>
     )
 };
 
+ReactOnRails.registerStore({AppStore});
 ReactOnRails.register({BlogApp});

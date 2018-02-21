@@ -21,7 +21,7 @@ class ArticleController extends Controller
         $articles_response = $restController->getArticlesAction($request);
         $articles = json_decode($articles_response->getContent());
 
-        return $this->render('base.html.twig', ['props' => ['articles' => $articles]]);
+        return $this->render('base.html.twig', ['props' => ['articleList' => $articles]]);
 //        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
 //
 //        $currentPageNr = $request->query->getInt('page', 1);

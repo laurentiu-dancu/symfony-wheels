@@ -1,17 +1,17 @@
 import React from 'react'
-import ArticlesContainer from './article/containers/ArticlesContainer'
-import ArticleContainer from './article/containers/ArticleContainer'
+import ArticleList from './article/containers/ArticleListConainer'
+import Article from './article/containers/ArticleContainer'
 import ContactForm from './contact/containers/ContactFormContainer'
 
 const routes = [
     {
         path: '/',
         exact: true,
-        component: ArticlesContainer
+        component: ArticleList
     },
     {
         path: '/article/:id',
-        component: ArticleContainer,
+        component: Article,
     },
     {
         path: '/contact',

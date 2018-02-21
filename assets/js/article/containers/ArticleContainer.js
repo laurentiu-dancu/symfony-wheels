@@ -1,38 +1,18 @@
 import React from 'react'
 import ArticleDetailWidget from '../components/ArticleDetailWidget';
+import ArticleActions from '../../actions/ArticleActions';
+import { connect } from 'react-redux'
 
-export default class ArticleContainer extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-
-        //We check it there is no recipe (only client side)
-        //Or our id doesn't match the recipe that we received server-side
-        if (!this.props.article || (this.props.match.params.id && this.props.match.params.id != this.props.article.id)) {
-            this.state = {
-                article: null,
-                loading: true
-            }
-        } else {
-            this.state = {
-                article: this.props.article,
-                loading: false
-            }
-        }
-    }
+class ArticleContainer extends React.Component {
     componentDidMount() {
-        if (this.state.loading) {
-            fetch(this.props.base + '/api/articles/' + this.props.match.params.id).then((response) => {
-                return response.json()
-            }).then((data) => {
-                this.setState({
-                    article : data,
-                    loading: false
-                })
-            })
+        if (!this.props.article || this.props.article.id != this.props.match.params.id) {
+            const {dispatch} = this.props;
+            dispatch(ArticleActions.fetchArticle(this.props.match.params.id, this.props.baseUrl))
         }
     }
+
     render() {
-        if (this.state.loading) {
+        if (this.props.fetching || !this.props.article || this.props.article.id != this.props.match.params.id) {
             return (
                 <div>
                     Loading...
@@ -40,8 +20,16 @@ export default class ArticleContainer extends React.Component {
             )
         } else {
             return(
-                <ArticleDetailWidget article={this.state.article}/>
+                <ArticleDetailWidget article={this.props.article}/>
             );
         }
     }
 }
+
+const mapStateToProps = (store) => ({
+    article: store.articleState.article,
+    fetching: store.articleState.fetching,
+    baseUrl: store.articleState.baseUrl,
+});
+
+export default connect(mapStateToProps)(ArticleContainer)

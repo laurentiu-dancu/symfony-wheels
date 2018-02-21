@@ -2,6 +2,7 @@
 
 {% block body %}
     <div>
-        {{ react_component('ArticlesApp', {'props': props}) }}
+        {{ redux_store('AppStore', props) }}
+        {{ react_component('ArticlesApp') }}
     </div>
 {% endblock %}
