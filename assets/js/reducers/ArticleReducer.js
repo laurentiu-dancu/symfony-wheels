@@ -5,7 +5,8 @@ export const initialState = {
     articleList: null,
     fetching: false,
     baseUrl: '/',
-    location: '/'
+    location: '/',
+    limit: 5,
 };
 
 export default function ArticleReducer(state = initialState, action) {
@@ -27,6 +28,9 @@ export default function ArticleReducer(state = initialState, action) {
 
         case `${Types.GET_ARTICLE_LIST}_REJECTED`:
             return { ...state, fetching: false };
+
+        case Types.CHANGE_ARTICLE_LIST_LIMIT:
+            return {...state, limit: action.limit};
 
         default:
             return state;

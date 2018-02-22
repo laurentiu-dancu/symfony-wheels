@@ -12,15 +12,20 @@ const Actions = {
         })
     }),
 
-    fetchArticleList: (baseUrl) => ({
+    fetchArticleList: (baseUrl, limit = 5) => ({
         type: Types.GET_ARTICLE_LIST,
         payload: new Promise(resolve => {
-            fetch(baseUrl + '/api/articles').then((response) => {
+            fetch(baseUrl + '/api/articles?limit=' + limit).then((response) => {
                 return response.json()
             }).then((data => {
                 resolve(data)
             }))
         })
+    }),
+
+    changeLimit: (limit) => ({
+        type: Types.CHANGE_ARTICLE_LIST_LIMIT,
+        limit: limit,
     }),
 
 };
