@@ -3,6 +3,7 @@ import ArticleListWidget from '../components/ArticleListWidget';
 import {connect} from 'react-redux'
 import ArticleActions from '../../actions/ArticleActions';
 import PageLimitWidget from "../components/PageLimitWidget";
+import PagerWidget from "../components/PagerWidget";
 
 class ArticleListContainer extends React.Component {
     static prefetch(props) {
@@ -16,8 +17,16 @@ class ArticleListContainer extends React.Component {
 
     onLimitChange(event) {
         const {dispatch} = this.props;
-        dispatch(ArticleActions.changeLimit(event.target.value));
-        dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, event.target.value))
+        const value = event.target.value;
+        dispatch(ArticleActions.changeLimit(value));
+        dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, value, this.props.page))
+    }
+
+    onPagerClick(event) {
+        const {dispatch} = this.props;
+        const value = event.target.value;
+        dispatch(ArticleActions.changePage(value));
+        dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, this.props.limit, value))
     }
 
     render() {
@@ -32,6 +41,7 @@ class ArticleListContainer extends React.Component {
                 <div>
                     <ArticleListWidget articleList={this.props.articleList}/>
                     <PageLimitWidget limit={this.props.limit} onChange={this.onLimitChange.bind(this)} />
+                    <PagerWidget totalPages={this.props.totalPages} currentPage={this.props.page} onClick={this.onPagerClick.bind(this)}/>
                 </div>
             )
         }
@@ -43,6 +53,8 @@ const mapStateToProps = (store) => ({
     fetching: store.articleState.fetching,
     baseUrl: store.articleState.baseUrl,
     limit: store.articleState.limit,
+    page: store.articleState.page,
+    totalPages: store.articleState.totalPages,
 });
 
 export default connect(mapStateToProps)(ArticleListContainer)

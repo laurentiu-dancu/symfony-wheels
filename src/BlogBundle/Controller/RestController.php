@@ -45,13 +45,21 @@ class RestController extends FOSRestController {
         $currentPageLimit = $request->query->getInt('limit', ArticleController::PAGINATION_LIMITS[1]);
 
         $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
-        $data = $repo->getPaginated($currentPageNr, $currentPageLimit);
+        $totalPages = ceil($repo->countArticles() / $currentPageLimit);
+        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit);
+        $data = [
+            'articles' => $articles,
+            'limit' => $currentPageLimit,
+            'page' => $currentPageNr,
+            'totalPages' => $totalPages,
+        ];
         $view = $this->view($data, 200);
         $context = $view->getContext();
 
         $context->addGroups(['Default']);
         $view->setContext($context);
         $view->setFormat('json');
+
 
         return $this->handleView($view);
     }

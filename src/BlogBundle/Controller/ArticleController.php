@@ -19,48 +19,9 @@ class ArticleController extends Controller
     {
         $restController = $this->get(RestController::class);
         $articles_response = $restController->getArticlesAction($request);
-        $articles = json_decode($articles_response->getContent());
+        $data = json_decode($articles_response->getContent(), TRUE);
 
-        return $this->render('base.html.twig', ['props' => ['articleList' => $articles]]);
-//        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
-//
-//        $currentPageNr = $request->query->getInt('page', 1);
-//        $currentPageLimit = $request->query->getInt('limit', static::PAGINATION_LIMITS[1]);
-//
-//        if (!in_array($currentPageLimit, static::PAGINATION_LIMITS)) {
-//            return $this->redirectToRoute('blog_homepage');
-//        }
-//
-//        $totalPages = ceil($repo->countArticles() / $currentPageLimit);
-//
-//        if ($currentPageNr < 1 || $currentPageNr > $totalPages) {
-//            return $this->redirectToRoute('blog_homepage');
-//        }
-//
-//
-//        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
-//
-//        $encoders = [new JsonEncoder()];
-//        $normalizers = [new JsonSerializableNormalizer];
-//        $serializer = new Serializer($normalizers, $encoders);
-//
-//        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit);
-//        $jsonArticles = $serializer->normalize(['articles' => $articles]);
-//        // End react stuff.
-//
-//        return $this->render(
-//            '@Blog/Article/articleListReact.html.twig',
-//            [
-//                'articles' => $articles,
-//                'props' => $jsonArticles,
-//                'currentLimit' => $currentPageLimit,
-//                'limits' => static::PAGINATION_LIMITS,
-//                'currentPage' => $currentPageNr,
-//                'totalPages' => $totalPages,
-//                'paginationRouteName' => 'blog_homepage',
-//                'paginationRouteParams' => [],
-//            ]
-//        );
+        return $this->render('base.html.twig', ['props' => ['articleList' => $data['articles'], 'totalPages' => $data['totalPages']]]);
     }
 
     public function detailAction(Request $request, Article $article)

@@ -7,6 +7,8 @@ export const initialState = {
     baseUrl: '/',
     location: '/',
     limit: 5,
+    page: 1,
+    totalPages: 1,
 };
 
 export default function ArticleReducer(state = initialState, action) {
@@ -24,13 +26,16 @@ export default function ArticleReducer(state = initialState, action) {
             return {...state, fetching: true};
 
         case `${Types.GET_ARTICLE_LIST}_FULFILLED`:
-            return { ...state, articleList: action.payload, fetching: false };
+            return { ...state, articleList: action.payload.articles, totalPages: action.payload.totalPages, fetching: false };
 
         case `${Types.GET_ARTICLE_LIST}_REJECTED`:
             return { ...state, fetching: false };
 
         case Types.CHANGE_ARTICLE_LIST_LIMIT:
             return {...state, limit: action.limit};
+
+        case Types.CHANGE_ARTICLE_PAGE:
+            return {...state, page: parseInt(action.page)};
 
         default:
             return state;
