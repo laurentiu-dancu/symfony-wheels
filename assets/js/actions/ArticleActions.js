@@ -1,35 +1,28 @@
-import Constants from '../constants'
+import Types from '../constants'
 
 const Actions = {
-    fetchArticle: (id, baseUrl) => {
-        return dispatch => {
-            dispatch({type: Constants.ARTICLE_FETCH});
-
+    fetchArticle: (baseUrl, id) => ({
+        type: Types.GET_ARTICLE,
+        payload: new Promise(resolve => {
             fetch(baseUrl + '/api/articles/' + id).then((response) => {
                 return response.json()
-            }).then((data) => {
-                dispatch({
-                    article : data,
-                    type: Constants.ARTICLE_RECEIVE
-                })
-            })
-        }
-    },
+            }).then((data => {
+                resolve(data)
+            }))
+        })
+    }),
 
-    fetchArticleList: (baseUrl) => {
-        return dispatch => {
-            dispatch({type: Constants.ARTICLE_LIST_FETCH});
-
+    fetchArticleList: (baseUrl) => ({
+        type: Types.GET_ARTICLE_LIST,
+        payload: new Promise(resolve => {
             fetch(baseUrl + '/api/articles').then((response) => {
                 return response.json()
-            }).then((data) => {
-                dispatch({
-                    articleList : data,
-                    type: Constants.ARTICLE_LIST_RECEIVE
-                })
-            })
-        }
-    }
+            }).then((data => {
+                resolve(data)
+            }))
+        })
+    }),
+
 };
 
 export default Actions;

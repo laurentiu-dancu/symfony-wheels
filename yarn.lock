@@ -5204,7 +5204,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.6.0:
+prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -5347,6 +5347,12 @@ react-on-rails@^10.0.1:
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/react-on-rails/-/react-on-rails-10.1.1.tgz#b645e3e2021c66ba3d77fa5660692a9de3219462"
 
+react-redux-loading-bar@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-redux-loading-bar/-/react-redux-loading-bar-3.1.1.tgz#5ec7dcbce0f35649ceaa78373543d70dfe79abd2"
+  dependencies:
+    prop-types "^15.5.6"
+
 react-redux@^5.0.6:
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
@@ -5368,6 +5374,15 @@ react-router-dom@^4.2.2:
     prop-types "^15.5.4"
     react-router "^4.2.0"
     warning "^3.0.0"
+
+react-router-prefetch@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/react-router-prefetch/-/react-router-prefetch-0.6.3.tgz#c5608949dc803718c330322381fad7cc9c3aaa84"
+  dependencies:
+    prop-types "^15.6.0"
+    react "^16.2.0"
+    react-dom "^16.2.0"
+    react-router-dom "^4.2.2"
 
 react-router@^4.2.0:
   version "4.2.0"
@@ -5496,6 +5511,10 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux-promise-middleware@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/redux-promise-middleware/-/redux-promise-middleware-5.0.0.tgz#1656b24f9ac962bf11fbe55ea8360810e18d47a7"
 
 redux-thunk@^2.2.0:
   version "2.2.0"

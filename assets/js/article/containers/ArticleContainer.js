@@ -1,21 +1,25 @@
 import React from 'react'
 import ArticleDetailWidget from '../components/ArticleDetailWidget';
 import ArticleActions from '../../actions/ArticleActions';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 class ArticleContainer extends React.Component {
-    componentDidMount() {
-        if (!this.props.article || this.props.article.id != this.props.match.params.id) {
-            const {dispatch} = this.props;
-            dispatch(ArticleActions.fetchArticle(this.props.match.params.id, this.props.baseUrl))
+    static prefetch(props) {
+        if (!props.article || props.article.id != props.match.params.id) {
+            return new Promise((resolve) => {
+                const id = props.match.params.id;
+                const baseUrl = props.baseUrl;
+
+                resolve(props.dispatch(ArticleActions.fetchArticle(baseUrl, id)));
+            });
         }
     }
 
     render() {
-        if (this.props.fetching || !this.props.article || this.props.article.id != this.props.match.params.id) {
+        if (!this.props.article || this.props.article.id != this.props.match.params.id) {
             return (
                 <div>
-                    Loading...
+                    Unable to load page.
                 </div>
             )
         } else {

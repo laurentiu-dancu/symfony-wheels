@@ -5,6 +5,9 @@ import {BrowserRouter, StaticRouter} from 'react-router-dom'
 import AppStore from './store'
 import Routes from './routing';
 import {Header, Menu, Content, Cancer}  from './layout'
+import Prefetch from 'react-router-prefetch'
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import LoadingBar from 'react-redux-loading-bar';
 
 const BlogApp = (initialProps, context) => {
     const store = ReactOnRails.getStore('AppStore');
@@ -26,12 +29,16 @@ const BlogApp = (initialProps, context) => {
     return (
         <Provider store={store}>
             <Router>
-                <div className="react-router-container">
-                    <Header/>
-                    <Menu/>
-                    <Content routes={Routes}/>
-                    {/*<Cancer/>*/}
-                </div>
+                <Prefetch preloader={null}
+                          onError={message => window.alert(message)}>
+                    <div className="react-router-container">
+                        <Header/>
+                        <Menu/>
+                        <LoadingBar />
+                        <Content routes={Routes}/>
+                        {/*<Cancer/>*/}
+                    </div>
+                </Prefetch>
             </Router>
         </Provider>
     )

@@ -1,8 +1,6 @@
-const Constants = {
-    ARTICLE_FETCH: 'articleFetch',
-    ARTICLE_RECEIVE: 'articleReceive',
-    ARTICLE_LIST_FETCH: 'articleListFetch',
-    ARTICLE_LIST_RECEIVE: 'articleListReceive',
+const Types = {
+    GET_ARTICLE: 'GET_ARTICLE',
+    GET_ARTICLE_LIST: 'GET_ARTICLE_LIST',
 };
 
-export default Constants
+export default Types

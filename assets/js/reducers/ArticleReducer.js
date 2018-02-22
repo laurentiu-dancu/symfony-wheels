@@ -1,4 +1,4 @@
-import Constants from '../constants'
+import Types from '../constants'
 
 export const initialState = {
     article: null,
@@ -10,21 +10,26 @@ export const initialState = {
 
 export default function ArticleReducer(state = initialState, action) {
     switch (action.type) {
-        case Constants.ARTICLE_FETCH:
+        case `${Types.GET_ARTICLE}_PENDING`:
             return {...state, fetching: true};
 
-        case Constants.ARTICLE_RECEIVE:
-            return { ...state, article: action.article, fetching: false };
+        case `${Types.GET_ARTICLE}_FULFILLED`:
+            return { ...state, article: action.payload, fetching: false };
 
-        case Constants.ARTICLE_LIST_FETCH:
+        case `${Types.GET_ARTICLE}_REJECTED`:
+            return { ...state, fetching: false };
+
+        case `${Types.GET_ARTICLE_LIST}_PENDING`:
             return {...state, fetching: true};
 
-        case Constants.ARTICLE_LIST_RECEIVE:
-            return { ...state, articleList: action.articleList, fetching: false };
+        case `${Types.GET_ARTICLE_LIST}_FULFILLED`:
+            return { ...state, articleList: action.payload, fetching: false };
+
+        case `${Types.GET_ARTICLE_LIST}_REJECTED`:
+            return { ...state, fetching: false };
 
         default:
             return state;
     }
-
 
 }

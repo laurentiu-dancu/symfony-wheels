@@ -1,21 +1,23 @@
 import React from 'react'
 import ArticleListWidget from '../components/ArticleListWidget';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import ArticleActions from '../../actions/ArticleActions';
 
 class ArticleListContainer extends React.Component {
-    componentDidMount() {
-        if (!this.props.articleList) {
-            const {dispatch} = this.props;
-            dispatch(ArticleActions.fetchArticleList(this.props.baseUrl))
+    static prefetch(props) {
+        if (!props.articleList) {
+            return new Promise((resolve) => {
+                const {dispatch} = props;
+                resolve(dispatch(ArticleActions.fetchArticleList(props.baseUrl)))
+            });
         }
     }
 
     render() {
-        if (this.props.fetching || !this.props.articleList) {
+        if (!this.props.articleList) {
             return (
                 <div>
-                    Loading...
+                    Unable to load page.
                 </div>
             )
         } else {
