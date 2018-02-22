@@ -12,6 +12,8 @@ export default class ContactFormContainer extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    static prefetch(props) {}
+
     static getInitialState() {
         return {
             firstName: '',
