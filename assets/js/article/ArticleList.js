@@ -1,16 +1,20 @@
 import React from 'react'
-import ArticleListWidget from '../components/ArticleListWidget';
+import ArticleListWidget from './components/ArticleListWidget';
 import {connect} from 'react-redux'
-import ArticleActions from '../../actions/ArticleActions';
-import PageLimitWidget from "../components/PageLimitWidget";
-import PagerWidget from "../components/PagerWidget";
+import ArticleActions from '../actions/ArticleActions';
+import PageLimitWidget from "./components/PageLimitWidget";
+import PagerWidget from "./components/PagerWidget";
 
-class ArticleListContainer extends React.Component {
+class ArticleList extends React.Component {
     static prefetch(props) {
-        if (!props.articleList) {
+        const categoryId = props.match.params.id ? props.match.params.id : null;
+        const categoryChanged = props.category !== categoryId;
+        if (!props.articleList || categoryChanged) {
+            const {dispatch} = props;
+            dispatch(ArticleActions.changeCategory(categoryId));
+            const page = categoryChanged ? 1 : props.page;
             return new Promise((resolve) => {
-                const {dispatch} = props;
-                resolve(dispatch(ArticleActions.fetchArticleList(props.baseUrl, props.limit)))
+                resolve(dispatch(ArticleActions.fetchArticleList(props.baseUrl, props.limit, page, categoryId)))
             });
         }
     }
@@ -19,14 +23,14 @@ class ArticleListContainer extends React.Component {
         const {dispatch} = this.props;
         const value = event.target.value;
         dispatch(ArticleActions.changeLimit(value));
-        dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, value, this.props.page))
+        dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, value, this.props.page, this.props.category))
     }
 
     onPagerClick(event) {
         const {dispatch} = this.props;
         const value = event.target.value;
         dispatch(ArticleActions.changePage(value));
-        dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, this.props.limit, value))
+        dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, this.props.limit, value, this.props.category))
     }
 
     render() {
@@ -55,6 +59,7 @@ const mapStateToProps = (store) => ({
     limit: store.articleState.limit,
     page: store.articleState.page,
     totalPages: store.articleState.totalPages,
+    category: store.articleState.category,
 });
 
-export default connect(mapStateToProps)(ArticleListContainer)
+export default connect(mapStateToProps)(ArticleList)

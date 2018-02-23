@@ -26,6 +26,7 @@ const BlogApp = (initialProps, context) => {
             </BrowserRouter>
         )
     }
+
     return (
         <Provider store={store}>
             <Router>

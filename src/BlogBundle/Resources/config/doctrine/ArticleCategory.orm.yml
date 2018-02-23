@@ -1,6 +1,7 @@
 BlogBundle\Entity\ArticleCategory:
     type: entity
     table: null
+    repositoryClass: BlogBundle\Repository\CategoryRepository
     id:
         id:
             type: integer

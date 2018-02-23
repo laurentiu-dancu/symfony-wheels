@@ -12,10 +12,10 @@ const Actions = {
         })
     }),
 
-    fetchArticleList: (baseUrl, limit = 5, page = 1) => ({
+    fetchArticleList: (baseUrl, limit = 5, page = 1, category = null) => ({
         type: Types.GET_ARTICLE_LIST,
         payload: new Promise(resolve => {
-            fetch(baseUrl + '/api/articles?limit=' + limit + '&page=' + page).then((response) => {
+            fetch(baseUrl + '/api/articles?limit=' + limit + '&page=' + page + '&category=' + category).then((response) => {
                 return response.json()
             }).then((data => {
                 resolve(data)
@@ -32,6 +32,11 @@ const Actions = {
         type: Types.CHANGE_ARTICLE_PAGE,
         page: page,
     }),
+
+    changeCategory: (category) => ({
+        type: Types.CHANGE_ARTICLE_CATEGORY,
+        category: category,
+    })
 
 };
 

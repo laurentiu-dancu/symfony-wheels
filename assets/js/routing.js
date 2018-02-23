@@ -1,6 +1,5 @@
 import React from 'react'
-import ArticleList from './article/containers/ArticleListConainer'
-import Article from './article/containers/ArticleContainer'
+import {Article, ArticleList} from './article'
 import ContactForm from './contact/containers/ContactFormContainer'
 
 const routes = [
@@ -16,6 +15,10 @@ const routes = [
     {
         path: '/contact',
         component: ContactForm,
+    },
+    {
+        path: '/category/:id',
+        component: ArticleList
     },
 ];
 

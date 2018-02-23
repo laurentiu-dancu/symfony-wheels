@@ -1,4 +1,5 @@
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+//@import "~bootstrap/scss/bootstrap";
 
 .main-container {
   background: rgba(255, 255, 255, 0.92);
@@ -84,6 +85,11 @@
 @keyframes animation-hue-rotate {
   from {filter: hue-rotate(0deg);}
   to {filter: hue-rotate(360deg);}
+}
+
+.navbar-default {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
 }
 
 ////DO __NOT__ UNDER __ANY__ CIRCUMSTANCES UNCOMMENT THIS

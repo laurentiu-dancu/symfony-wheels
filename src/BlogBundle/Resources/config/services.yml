@@ -9,3 +9,7 @@ services:
     BlogBundle\Controller\RestController:
         arguments: ["@service_container", "@fos_rest.view_handler.default"]
         public: true
+
+    BlogBundle\Twig\CategoriesExtension:
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags: [twig.extension]

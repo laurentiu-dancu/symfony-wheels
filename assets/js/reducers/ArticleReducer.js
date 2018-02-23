@@ -1,6 +1,8 @@
 import Types from '../constants'
 
 export const initialState = {
+    categories: {},
+    category: null,
     article: null,
     articleList: null,
     fetching: false,
@@ -32,10 +34,13 @@ export default function ArticleReducer(state = initialState, action) {
             return { ...state, fetching: false };
 
         case Types.CHANGE_ARTICLE_LIST_LIMIT:
-            return {...state, limit: action.limit};
+            return {...state, limit: parseInt(action.limit)};
 
         case Types.CHANGE_ARTICLE_PAGE:
             return {...state, page: parseInt(action.page)};
+
+        case Types.CHANGE_ARTICLE_CATEGORY:
+            return {...state, category: parseInt(action.category), page: 1};
 
         default:
             return state;

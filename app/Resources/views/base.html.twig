@@ -11,7 +11,7 @@
     <body>
         <div class="animation-hue-item" id="background-image"></div>
         <div class="content">
-            {{ redux_store('AppStore', props) }}
+            {{ redux_store('AppStore', props|merge({'categories': categories()})) }}
             {{ react_component('BlogApp') }}
         </div>
         {% block javascripts %}

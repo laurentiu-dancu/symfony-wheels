@@ -1,10 +1,11 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
+import {connect} from 'react-redux'
+import CategoryMenuWidget from "./components/CategoryMenuWidget";
+import ArticleActions from '../actions/ArticleActions';
 
+class Menu extends React.Component {
 
-export default class Header extends React.Component {
-
-    //noinspection JSMethodCanBeStatic
     render() {
         return (
             <nav className="navbar navbar-default">
@@ -20,14 +21,18 @@ export default class Header extends React.Component {
                             Contact
                         </NavLink>
                     </div>
-                    {/*<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">*/}
-                        {/*<ul className="nav navbar-nav">*/}
-                            {/*{{ render(controller('BlogBundle:Category:_categoryMenu')) }}*/}
-                        {/*</ul>*/}
-                    {/*</div>*/}
+                    <CategoryMenuWidget categories={this.props.categories}/>
                 </div>
             </nav>
-
         );
     }
 }
+
+const mapStateToProps = (store) => ({
+    categories: store.articleState.categories,
+    limit: store.articleState.limit,
+    page: store.articleState.page,
+    category: store.articleState.category,
+});
+
+export default connect(mapStateToProps)(Menu)

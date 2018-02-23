@@ -1,9 +1,9 @@
 import React from 'react'
-import ArticleDetailWidget from '../components/ArticleDetailWidget';
-import ArticleActions from '../../actions/ArticleActions';
+import ArticleDetailWidget from './components/ArticleDetailWidget';
+import ArticleActions from '../actions/ArticleActions';
 import {connect} from 'react-redux'
 
-class ArticleContainer extends React.Component {
+class Article extends React.Component {
     static prefetch(props) {
         if (!props.article || props.article.id != props.match.params.id) {
             return new Promise((resolve) => {
@@ -36,4 +36,4 @@ const mapStateToProps = (store) => ({
     baseUrl: store.articleState.baseUrl,
 });
 
-export default connect(mapStateToProps)(ArticleContainer)
+export default connect(mapStateToProps)(Article)
