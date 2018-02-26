@@ -5,3 +5,8 @@ services:
 # Fixtures services
     BlogBundle\DataFixtures\ORM\Fixtures:
         tags: [doctrine.fixture.orm]
+
+# This is probably heresy but it works.
+    BlogBundle\EventSubscriber\UserRegisteredSubscriber:
+        tags: [kernel.event_subscriber]
+        arguments: ["@mailer", "@twig"]
