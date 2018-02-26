@@ -4,6 +4,7 @@ namespace BlogBundle\Form;
 
 use BlogBundle\Entity\Article;
 use BlogBundle\Entity\ArticleCategory;
+use BlogBundle\Form\EventListener\ArticleEventListener;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -50,7 +51,8 @@ class ArticleType extends AbstractType {
             ->add('category', EntityType::class, [
                 'class' => ArticleCategory::class,
             ])
-            ->add('save', SubmitType::class, ['label' => 'Publish']);
+            ->add('save', SubmitType::class, ['label' => 'Publish'])
+            ->addEventSubscriber(new ArticleEventListener());
     }
 
     public function configureOptions(OptionsResolver $resolver)
