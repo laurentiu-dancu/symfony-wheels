@@ -73,3 +73,7 @@ swiftmailer:
 
 vich_uploader:
     db_driver: orm
+    mappings:
+        article_image:
+            uri_prefix: /public/images/article
+            upload_destination: '%kernel.project_dir%/web/public/images/article'

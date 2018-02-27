@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArticleType extends AbstractType {
     const MAX_TITLE_LENGTH = 50;
@@ -50,6 +51,9 @@ class ArticleType extends AbstractType {
             ])
             ->add('category', EntityType::class, [
                 'class' => ArticleCategory::class,
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
             ])
             ->add('save', SubmitType::class, ['label' => 'Publish'])
             ->addEventSubscriber(new ArticleEventListener());

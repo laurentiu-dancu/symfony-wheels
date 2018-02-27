@@ -4,7 +4,7 @@
     <div>
         <h1>{{ article.title }}</h1>
         <hr/>
-        <img src="{{ article.image }}"/>
+        <img src="{{ vich_uploader_asset(article, 'imageFile') }}"/>
         <p>{{ article.content }}</p>
         <div class="form-inline">
             <a href="{{ path('article_edit', {id: article.id}) }}" class="btn btn-primary">Edit</a>
