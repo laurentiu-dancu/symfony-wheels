@@ -16,6 +16,7 @@
 /vendor/
 /web/bundles/
 /web/public/
+/web/media/
 
 # IDE settings
 .buildpath
