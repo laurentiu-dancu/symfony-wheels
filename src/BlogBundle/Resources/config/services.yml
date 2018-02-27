@@ -13,3 +13,8 @@ services:
     BlogBundle\Twig\CategoriesExtension:
         arguments: ["@doctrine.orm.entity_manager"]
         tags: [twig.extension]
+
+# This is probably heresy but it works.
+    BlogBundle\EventSubscriber\UserRegisteredSubscriber:
+        tags: [kernel.event_subscriber]
+        arguments: ["@mailer", "@twig"]

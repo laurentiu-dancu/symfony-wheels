@@ -73,6 +73,26 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+vich_uploader:
+    db_driver: orm
+    mappings:
+        article_image:
+            uri_prefix: /public/images/article
+            upload_destination: '%kernel.project_dir%/web/public/images/article'
+
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+    filter_sets:
+        cache: ~
+        thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }
+                background: { size: [124, 94], position: center, color: '#000000' }
+
 fos_rest:
     routing_loader:
         default_format: json

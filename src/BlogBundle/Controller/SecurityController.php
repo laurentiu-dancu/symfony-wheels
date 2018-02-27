@@ -3,8 +3,11 @@
 namespace BlogBundle\Controller;
 
 use BlogBundle\Entity\User;
+use BlogBundle\Event\UserRegisteredEvent;
+use BlogBundle\EventSubscriber\UserRegisteredSubscriber;
 use BlogBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -44,6 +47,10 @@ class SecurityController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+
+            $dispatcher = $this->container->get('event_dispatcher');
+            $event = new UserRegisteredEvent($user);
+            $dispatcher->dispatch(UserRegisteredEvent::NAME, $event);
 
             return $this->redirectToRoute('blog_homepage');
         }
