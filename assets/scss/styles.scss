@@ -24,6 +24,16 @@
   left: 0;
   position: fixed;
   right: 0;
+  z-index: 0;
+}
+
+#background-snoop {
+  background: url("../images/snoop.gif") repeat;
+  display: block;
+  height: 400px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   z-index: 1;
 }
 
@@ -87,6 +97,19 @@
   to {filter: hue-rotate(360deg);}
 }
 
+.animation-scroll-item {
+  animation-name: animation-scroll;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-fill-mode: none;
+}
+
+@keyframes animation-scroll {
+  from {left: -290px;}
+  to {left: 0;}
+}
+
 .navbar-default {
   background-color: #f8f8f8;
   border-color: #e7e7e7;
@@ -96,12 +119,11 @@
   padding-top: 8px;
 }
 
-////DO __NOT__ UNDER __ANY__ CIRCUMSTANCES UNCOMMENT THIS
-//a, img, div {
-//  transition: all 0.5s ease;
-//}
-//
-//a:hover, img:hover, div:hover {
-//  transform: rotate(360deg);
-//  z-index: 1000;
-//}
+a, img {
+  transition: all 0.5s ease;
+}
+
+a:hover, img:hover {
+  transform: rotate(360deg);
+  z-index: 1000;
+}

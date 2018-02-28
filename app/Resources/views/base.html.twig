@@ -10,6 +10,7 @@
     </head>
     <body>
         <div class="animation-hue-item" id="background-image"></div>
+        <div class="animation-scroll-item" id="background-snoop"></div>
         <div class="content">
             {{ redux_store('AppStore', props|merge({'categories': categories()})) }}
             {{ react_component('BlogApp') }}
