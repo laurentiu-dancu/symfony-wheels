@@ -43,6 +43,7 @@
     "webpack-serverside": "encore dev --config webpack.config.serverside.js --watch",
     "webpack-dev": "encore dev-server",
     "webpack": "encore dev",
-    "webpack-watch": "encore dev --watch"
+    "webpack-watch": "encore dev --watch",
+    "build": "encore dev --config webpack.config.serverside.js & encore dev"
   }
 }

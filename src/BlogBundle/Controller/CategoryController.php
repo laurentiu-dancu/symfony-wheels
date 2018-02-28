@@ -24,34 +24,16 @@ class CategoryController extends Controller
     }
 
     public function listAction(ArticleCategory $category, Request $request) {
-        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
-
-        $currentPageNr = $request->query->getInt('page', 1);
-        $currentPageLimit = $request->query->getInt('limit', static::PAGINATION_LIMITS[1]);
-
-        if (!in_array($currentPageLimit, static::PAGINATION_LIMITS)) {
-            return $this->redirectToRoute('blog_homepage');
+        $restController = $this->get(RestController::class);
+        if ($category) {
+            $request->query->add([
+                'category' => $category->getId(),
+            ]);
         }
 
-        $totalPages = ceil($repo->countArticles($category->getId()) / $currentPageLimit);
+        $articles_response = $restController->getArticlesAction($request);
+        $data = json_decode($articles_response->getContent(), TRUE);
 
-        if ($currentPageNr < 1 || $currentPageNr > $totalPages) {
-            return $this->redirectToRoute('blog_homepage');
-        }
-
-        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit, $category->getId());
-
-        return $this->render(
-            '@Blog/Article/articleList.html.twig',
-            [
-                'articles' => $articles,
-                'paginationRouteName' => 'category_list',
-                'paginationRouteParams' => ['id' => $category->getId()],
-                'currentLimit' => $currentPageLimit,
-                'limits' => static::PAGINATION_LIMITS,
-                'currentPage' => $currentPageNr,
-                'totalPages' => $totalPages,
-            ]
-        );
+        return $this->render('base.html.twig', ['props' => $data]);
     }
 }

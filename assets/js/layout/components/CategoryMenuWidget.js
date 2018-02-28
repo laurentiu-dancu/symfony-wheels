@@ -1,16 +1,14 @@
 import React from 'react'
-import {DropdownButton, MenuItem} from 'react-bootstrap'
+import {DropdownButton} from 'react-bootstrap'
 import {Link} from "react-router-dom";
 
 const CategoryMenuWidget = (props) => (
-    <div>
+    <div className={"category-dropdown-container"}>
         <DropdownButton id="category-selector" title="Categories">
-            <MenuItem header>Pick your poison</MenuItem>
-            {props.categories.map(category => {
+            {Object.keys(props.categories).map(key => {
                 return(
-                    <Link key={category.id} to={'/category/' + category.id}>
-                        <MenuItem divider />
-                        <span className='btn'>{category.name}</span>
+                    <Link key={key} to={'/category/' + key}>
+                        <span className='btn'>{props.categories[key].name}</span>
                     </Link>
                 )
             })}

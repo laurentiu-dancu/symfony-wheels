@@ -14,8 +14,9 @@ class CategoryRepository extends EntityRepository
 {
     public function getFormatted() {
         $query = $this->createQueryBuilder('c');
-        $query->select('c.id', 'c.name');
+        $query->select('c.id', 'c.name')->indexBy('c', 'c.id');
+        $result = $query->getQuery()->getResult();
 
-        return $query->getQuery()->getResult();
+        return $result;
     }
 }

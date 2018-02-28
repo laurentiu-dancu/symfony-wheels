@@ -21,7 +21,7 @@ class ArticleController extends Controller
         $articles_response = $restController->getArticlesAction($request);
         $data = json_decode($articles_response->getContent(), TRUE);
 
-        return $this->render('base.html.twig', ['props' => ['articleList' => $data['articles'], 'totalPages' => $data['totalPages']]]);
+        return $this->render('base.html.twig', ['props' => $data]);
     }
 
     public function detailAction(Request $request, Article $article)

@@ -28,7 +28,7 @@ export default function ArticleReducer(state = initialState, action) {
             return {...state, fetching: true};
 
         case `${Types.GET_ARTICLE_LIST}_FULFILLED`:
-            return { ...state, articleList: action.payload.articles, totalPages: action.payload.totalPages, fetching: false };
+            return { ...state, articleList: action.payload.articleList, totalPages: action.payload.totalPages, fetching: false };
 
         case `${Types.GET_ARTICLE_LIST}_REJECTED`:
             return { ...state, fetching: false };
@@ -40,7 +40,7 @@ export default function ArticleReducer(state = initialState, action) {
             return {...state, page: parseInt(action.page)};
 
         case Types.CHANGE_ARTICLE_CATEGORY:
-            return {...state, category: parseInt(action.category), page: 1};
+            return {...state, category: action.category, page: 1};
 
         default:
             return state;

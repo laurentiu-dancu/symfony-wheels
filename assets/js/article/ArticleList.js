@@ -7,7 +7,7 @@ import PagerWidget from "./components/PagerWidget";
 
 class ArticleList extends React.Component {
     static prefetch(props) {
-        const categoryId = props.match.params.id ? props.match.params.id : null;
+        const categoryId = props.match.params.id ? parseInt(props.match.params.id) : null;
         const categoryChanged = props.category !== categoryId;
         if (!props.articleList || categoryChanged) {
             const {dispatch} = props;
@@ -21,14 +21,14 @@ class ArticleList extends React.Component {
 
     onLimitChange(event) {
         const {dispatch} = this.props;
-        const value = event.target.value;
+        const value = event;
         dispatch(ArticleActions.changeLimit(value));
         dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, value, this.props.page, this.props.category))
     }
 
     onPagerClick(event) {
         const {dispatch} = this.props;
-        const value = event.target.value;
+        const value = event.target.getAttribute('value');
         dispatch(ArticleActions.changePage(value));
         dispatch(ArticleActions.fetchArticleList(this.props.baseUrl, this.props.limit, value, this.props.category))
     }
@@ -43,7 +43,7 @@ class ArticleList extends React.Component {
         } else {
             return (
                 <div>
-                    <ArticleListWidget articleList={this.props.articleList}/>
+                    <ArticleListWidget categories={this.props.categories} category={this.props.category} articleList={this.props.articleList}/>
                     <PageLimitWidget limit={this.props.limit} onChange={this.onLimitChange.bind(this)} />
                     <PagerWidget totalPages={this.props.totalPages} currentPage={this.props.page} onClick={this.onPagerClick.bind(this)}/>
                 </div>
@@ -60,6 +60,7 @@ const mapStateToProps = (store) => ({
     page: store.articleState.page,
     totalPages: store.articleState.totalPages,
     category: store.articleState.category,
+    categories: store.articleState.categories,
 });
 
 export default connect(mapStateToProps)(ArticleList)

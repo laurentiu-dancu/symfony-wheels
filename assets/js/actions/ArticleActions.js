@@ -35,7 +35,7 @@ const Actions = {
 
     changeCategory: (category) => ({
         type: Types.CHANGE_ARTICLE_CATEGORY,
-        category: category,
+        category: category ? parseInt(category) : null,
     })
 
 };

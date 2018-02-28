@@ -49,11 +49,11 @@ class RestController extends FOSRestController {
         $totalPages = ceil($repo->countArticles($category) / $limit);
         $articles = $repo->getPaginated($page, $limit, $category);
         $data = [
-            'articles' => $articles,
+            'articleList' => $articles,
             'limit' => $limit,
             'page' => $page,
             'totalPages' => $totalPages,
-            'category' => $category,
+            'category' => $category ? $category : null,
         ];
         $view = $this->view($data, 200);
         $context = $view->getContext();
