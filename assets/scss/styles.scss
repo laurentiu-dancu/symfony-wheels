@@ -31,7 +31,7 @@
   background: url("../images/snoop.gif") repeat;
   display: block;
   height: 400px;
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   z-index: 1;
@@ -119,11 +119,11 @@
   padding-top: 8px;
 }
 
-a, img {
+a {
   transition: all 0.5s ease;
 }
 
-a:hover, img:hover {
+a:hover {
   transform: rotate(360deg);
   z-index: 1000;
 }
