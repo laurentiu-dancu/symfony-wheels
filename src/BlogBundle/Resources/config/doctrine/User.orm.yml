@@ -1,6 +1,7 @@
 BlogBundle\Entity\User:
     type: entity
     table: user
+    repositoryClass: BlogBundle\Repository\UserRepository
     id:
         id:
             type: integer
@@ -32,6 +33,9 @@ BlogBundle\Entity\User:
             nullable: true
         roles:
             type: array
+        subscribed:
+            type: boolean
+            nullable: true
     lifecycleCallbacks: {  }
 
     oneToMany:

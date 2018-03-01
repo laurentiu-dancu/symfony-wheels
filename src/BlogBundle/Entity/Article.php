@@ -259,4 +259,33 @@ class Article
     {
         return $this->comments;
     }
+    /**
+     * @var bool|null
+     */
+    private $dispatched;
+
+
+    /**
+     * Set dispatched.
+     *
+     * @param bool|null $dispatched
+     *
+     * @return Article
+     */
+    public function setDispatched($dispatched = null)
+    {
+        $this->dispatched = $dispatched;
+
+        return $this;
+    }
+
+    /**
+     * Get dispatched.
+     *
+     * @return bool|null
+     */
+    public function getDispatched()
+    {
+        return $this->dispatched;
+    }
 }

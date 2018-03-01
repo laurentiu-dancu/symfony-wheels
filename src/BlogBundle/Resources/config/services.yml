@@ -10,3 +10,8 @@ services:
     BlogBundle\EventSubscriber\UserRegisteredSubscriber:
         tags: [kernel.event_subscriber]
         arguments: ["@mailer", "@twig"]
+
+    BlogBundle\Command\NotifyArticleCommand:
+        arguments: ["blog:notify-article", "@doctrine.orm.entity_manager"]
+        tags:
+            command: 'blog:notify-article'

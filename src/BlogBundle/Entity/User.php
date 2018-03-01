@@ -284,4 +284,33 @@ class User implements UserInterface
     {
         return $this->getUsername();
     }
+    /**
+     * @var bool|null
+     */
+    private $subscribed;
+
+
+    /**
+     * Set subscribed.
+     *
+     * @param bool|null $subscribed
+     *
+     * @return User
+     */
+    public function setSubscribed($subscribed = null)
+    {
+        $this->subscribed = $subscribed;
+
+        return $this;
+    }
+
+    /**
+     * Get subscribed.
+     *
+     * @return bool|null
+     */
+    public function getSubscribed()
+    {
+        return $this->subscribed;
+    }
 }

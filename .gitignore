@@ -17,6 +17,8 @@
 /web/bundles/
 /web/public/
 /web/media/
+!web/media/.htaccess
+!web/public/.htaccess
 
 # IDE settings
 .buildpath
@@ -33,3 +35,4 @@
 # node files
 /node_modules
 /web/build
+/app/Resources/webpack

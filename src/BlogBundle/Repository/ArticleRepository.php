@@ -44,4 +44,13 @@ class ArticleRepository extends EntityRepository
 
         return $qb->getQuery()->getSingleScalarResult();
     }
+
+    public function getArticlesToDispatch() {
+        $query = $this
+            ->createQueryBuilder('a')
+            ->orWhere('a.dispatched <> 1')
+            ->orWhere('a.dispatched IS NULL');
+
+        return $query->getQuery()->getResult();
+    }
 }
