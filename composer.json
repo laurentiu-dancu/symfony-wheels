@@ -1,6 +1,6 @@
 {
-    "name": "laurentiu.dancu/blog",
-    "license": "proprietary",
+    "name": "novaFTL/symfony-wheels",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-4": {
