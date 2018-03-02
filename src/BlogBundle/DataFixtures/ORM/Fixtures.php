@@ -88,6 +88,8 @@ class Fixtures extends Fixture {
             $article->setTitle($articleArray[1]);
             $article->setContent($articleArray[2]);
             $article->setImage($articleArray[3]);
+            $article->setLangcode('en');
+            $article->setDispatched('true');
             $manager->persist($article);
 
             foreach ($this->commentsLevel1 as $l1key => $commentArray) {

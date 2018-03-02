@@ -39,7 +39,10 @@ class CategoryController extends Controller
             return $this->redirectToRoute('blog_homepage');
         }
 
-        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit, $category->getId());
+        $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
+        $langcode = $request->getLocale();
+
+        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit, $category->getId(), $langcode);
 
         return $this->render(
             '@Blog/Article/articleList.html.twig',

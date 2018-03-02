@@ -288,4 +288,33 @@ class Article
     {
         return $this->dispatched;
     }
+    /**
+     * @var string|null
+     */
+    private $langcode;
+
+
+    /**
+     * Set langcode.
+     *
+     * @param string|null $langcode
+     *
+     * @return Article
+     */
+    public function setLangcode($langcode = null)
+    {
+        $this->langcode = $langcode;
+
+        return $this;
+    }
+
+    /**
+     * Get langcode.
+     *
+     * @return string|null
+     */
+    public function getLangcode()
+    {
+        return $this->langcode;
+    }
 }

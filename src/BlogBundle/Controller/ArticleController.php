@@ -37,10 +37,10 @@ class ArticleController extends Controller
             return $this->redirectToRoute('blog_homepage');
         }
 
-
         $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
+        $langcode = $request->getLocale();
 
-        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit);
+        $articles = $repo->getPaginated($currentPageNr, $currentPageLimit, null, $langcode);
 
         return $this->render(
             '@Blog/Article/articleList.html.twig',

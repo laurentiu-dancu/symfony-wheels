@@ -32,6 +32,10 @@ BlogBundle\Entity\Article:
         dispatched:
             type: boolean
             nullable: true
+        langcode:
+            type: string
+            length: 255
+            nullable: true
     lifecycleCallbacks:
         prePersist: [setCreatedAtValue, setUpdatedAtValue]
         preUpdate: [setUpdatedAtValue]
