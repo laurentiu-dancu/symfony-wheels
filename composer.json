@@ -26,6 +26,7 @@
         "doctrine/orm": "^2.5",
         "friendsofsymfony/rest-bundle": "^2.3",
         "incenteev/composer-parameter-handler": "^2.0",
+        "jms/i18n-routing-bundle": "^2.0",
         "kint-php/kint": "^2.2",
         "liip/imagine-bundle": "^1.9",
         "jms/serializer-bundle": "^2.3",

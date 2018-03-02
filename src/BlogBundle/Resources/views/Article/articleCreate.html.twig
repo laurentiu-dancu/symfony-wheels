@@ -15,6 +15,10 @@
             {{ form_widget(form.category) }}
             {{ form_errors(form.category) }}
 
+        {{ form_label(form.langcode) }}
+        {{ form_widget(form.langcode) }}
+        {{ form_errors(form.langcode) }}
+
         {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
         {{ form_widget(form._token) }}
         {{ form_end(form) }}

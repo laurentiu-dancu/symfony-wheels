@@ -7,6 +7,7 @@ use BlogBundle\Entity\ArticleCategory;
 use BlogBundle\Form\EventListener\ArticleEventListener;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,6 +57,13 @@ class ArticleType extends AbstractType {
                 'required' => false,
             ])
             ->add('save', SubmitType::class, ['label' => 'Publish'])
+            ->add('langcode', ChoiceType::class, [
+                'label' => 'Language',
+                'choices' => [
+                    'ENglish' => 'en',
+                    'ROmaneste' => 'ro',
+                ],
+            ])
             ->addEventSubscriber(new ArticleEventListener());
     }
 

@@ -265,6 +265,64 @@ class Article implements JsonSerializable
     {
         return $this->comments;
     }
+    /**
+     * @var bool|null
+     */
+    private $dispatched;
+
+
+    /**
+     * Set dispatched.
+     *
+     * @param bool|null $dispatched
+     *
+     * @return Article
+     */
+    public function setDispatched($dispatched = null)
+    {
+        $this->dispatched = $dispatched;
+
+        return $this;
+    }
+
+    /**
+     * Get dispatched.
+     *
+     * @return bool|null
+     */
+    public function getDispatched()
+    {
+        return $this->dispatched;
+    }
+    /**
+     * @var string|null
+     */
+    private $langcode;
+
+
+    /**
+     * Set langcode.
+     *
+     * @param string|null $langcode
+     *
+     * @return Article
+     */
+    public function setLangcode($langcode = null)
+    {
+        $this->langcode = $langcode;
+
+        return $this;
+    }
+
+    /**
+     * Get langcode.
+     *
+     * @return string|null
+     */
+    public function getLangcode()
+    {
+        return $this->langcode;
+    }
 
     /**
      * Specify data which should be serialized to JSON

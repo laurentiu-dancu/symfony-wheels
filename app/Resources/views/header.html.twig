@@ -8,18 +8,20 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ path('blog_homepage') }}">
-                Home
+                {{ 'Home'|trans }}
             </a>
-            <a class="navbar-brand" href="{{ path('article_create') }}">New article</a>
-            <a class="navbar-brand" href="{{ path('contact_create') }}">Contact</a>
+            <a class="navbar-brand" href="{{ path('article_create') }}">{{ 'New article'|trans }}</a>
+            <a class="navbar-brand" href="{{ path('contact_create') }}">{{ 'Contact'|trans }}</a>
         </div>
         <div class="navbar-right">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="nav navbar-brand navbar-right" href="{{ path('logout') }}">Logout, {{ app.user.username }}</a>
+                <a class="nav navbar-brand navbar-right" href="{{ path('logout') }}">{{ 'Logout, %user'|trans({'%user': app.user.username }) }} </a>
             {% else %}
                 <a class="nav navbar-brand navbar-right" href="{{ path('login') }}">Login</a>
                 <a class="nav navbar-brand navbar-right" href="{{ path('register') }}">Register</a>
             {% endif %}
+            <a class="nav navbar-brand navbar-right" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale' : 'ro'})) }}">RO</a>
+            <a class="nav navbar-brand navbar-right" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale' : 'en'})) }}">EN</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">

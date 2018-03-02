@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-    public function getPaginated($pageNr, $limit, $categoryId = null)
+    public function getPaginated($pageNr, $limit, $categoryId = null, $langcode = null)
     {
         $firstResult = ($pageNr - 1) * $limit;
         $qb = $this->createQueryBuilder('a');
@@ -20,6 +20,10 @@ class ArticleRepository extends EntityRepository
         if ($categoryId) {
             $qb = $qb->andWhere('a.category = :categoryId')
                 ->setParameter('categoryId', $categoryId);
+        }
+        if ($langcode) {
+            $qb = $qb->andWhere('a.langcode = :langcode')
+                ->setParameter('langcode', $langcode);
         }
         $qb->setFirstResult($firstResult)
             ->setMaxResults($limit);
@@ -43,5 +47,14 @@ class ArticleRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getArticlesToDispatch() {
+        $query = $this
+            ->createQueryBuilder('a')
+            ->orWhere('a.dispatched <> 1')
+            ->orWhere('a.dispatched IS NULL');
+
+        return $query->getQuery()->getResult();
     }
 }

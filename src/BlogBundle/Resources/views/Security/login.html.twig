@@ -12,6 +12,8 @@
             <input  type="password" class="form-control{% if error %} form-control-warning{% endif %}"
                     id="exampleInputPassword3"  name="_password"  placeholder="Password">
         </div>
+        <input type="checkbox" id="remember_me" name="_remember_me" checked />
+        <label for="remember_me">Keep me logged in</label>
         <button type="submit" class="btn btn-primary">Sign in</button>
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
