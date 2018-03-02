@@ -37,6 +37,10 @@ security:
             logout:
                 path: /logout
                 target: /
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
     encoders:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
