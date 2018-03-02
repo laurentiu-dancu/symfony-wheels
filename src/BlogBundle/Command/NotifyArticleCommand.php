@@ -25,6 +25,7 @@ class NotifyArticleCommand extends ContainerAwareCommand {
         $em = $this->getContainer()->get('doctrine')->getManager();
         $mailer = $this->getContainer()->get('mailer');
         $renderer = $this->getContainer()->get('twig');
+        $logger = $this->getContainer()->get('logger');
         $user_repository = $em->getRepository(User::class);
         $users = $user_repository->getSubscribedUsers();
 
@@ -53,6 +54,7 @@ class NotifyArticleCommand extends ContainerAwareCommand {
                             );
 
                         $mailer->send($message);
+                        $logger->info('Article ' . $article->getTitle() . ' dispatched to ' . $user->getEmail());
                     }
                 }
                 $article->setDispatched(true);
