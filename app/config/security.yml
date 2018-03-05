@@ -28,6 +28,23 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        login:
+            pattern:  ^/api/login
+            stateless: true
+            anonymous: true
+            form_login:
+                check_path:               /api/login_check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+
+        api:
+            pattern:   ^/api
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         main:
             anonymous: ~
             pattern: ^/
@@ -41,15 +58,20 @@ security:
                 secret:   '%secret%'
                 lifetime: 604800 # 1 week in seconds
                 path:     /
+
     encoders:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
             cost: 12
         BlogBundle\Entity\User:
             algorithm: bcrypt
+
     access_control:
         - { path: ^/article/create, role: [ ROLE_USER, ROLE_ADMIN ] }
         - { path: ^/article/delete, role: [ ROLE_ADMIN ] }
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+
     role_hierarchy:
         ROLE_ADMIN:      [ ROLE_USER ]
         ROLE_SUPERADMIN: [ ROLE_ADMIN ]

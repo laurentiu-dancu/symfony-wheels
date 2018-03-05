@@ -35,12 +35,6 @@ login:
     path: /login
     defaults: { _controller: BlogBundle:Security:login }
 
-login_check:
-    path: /login_check
-
-logout:
-    path: /logout
-
 register:
     path: /register
     defaults: { _controller: BlogBundle:Security:register }

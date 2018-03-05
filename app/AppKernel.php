@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Limenius\ReactBundle\LimeniusReactBundle(),
             new BlogBundle\BlogBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

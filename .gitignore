@@ -26,6 +26,10 @@
 .project
 .settings/
 .idea
+.vscode
+
+# Security LUL
+!var/jwt
 
 # Excluding unwanted files
 .DS_Store

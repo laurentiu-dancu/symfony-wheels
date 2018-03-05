@@ -102,3 +102,10 @@ jms_i18n_routing:
     default_locale: en
     locales: [ro, en]
     strategy: prefix_except_default
+
+# Security LUL (please use these as parameters in a real app)
+lexik_jwt_authentication:
+    private_key_path: '%kernel.project_dir%/var/jwt/private.pem'
+    public_key_path:  '%kernel.project_dir%/var/jwt/public.pem'
+    pass_phrase:      'secret'
+    token_ttl:        3600
