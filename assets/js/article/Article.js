@@ -1,7 +1,7 @@
 import React from 'react'
-import ArticleDetailWidget from './components/ArticleDetailWidget';
-import ArticleActions from '../actions/ArticleActions';
+import {ArticleActions} from 'actions';
 import {connect} from 'react-redux'
+import {ArticleDetail} from "./components";
 
 class Article extends React.Component {
     static prefetch(props) {
@@ -24,7 +24,7 @@ class Article extends React.Component {
             )
         } else {
             return(
-                <ArticleDetailWidget article={this.props.article}/>
+                <ArticleDetail article={this.props.article}/>
             );
         }
     }

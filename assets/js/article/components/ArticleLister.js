@@ -1,7 +1,7 @@
 import React from 'react'
-import ArticleListItemWidget from './ArticleListItemWidget';
+import ArticleListItem from './ArticleListItem';
 
-const ArticleListWidget = (props) => (
+const ArticleLister = (props) => (
     <div>
         {props.category &&
             <h2>
@@ -10,10 +10,10 @@ const ArticleListWidget = (props) => (
         }
         {props.articleList.map((article, idx) => (
             <div key={idx}>
-                <ArticleListItemWidget key={idx} article={article} id={idx}/>
+                <ArticleListItem key={idx} article={article} id={idx}/>
             </div>
         ))}
     </div>
 );
 
-export default ArticleListWidget
+export default ArticleLister

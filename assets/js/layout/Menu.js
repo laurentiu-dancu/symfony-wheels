@@ -1,8 +1,7 @@
 import React from 'react'
-import { NavLink, Redirect } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
-import CategoryMenuWidget from "./components/CategoryMenuWidget";
-import ArticleActions from '../actions/ArticleActions';
+import {CategoryMenu} from "./components";
 
 class Menu extends React.Component {
 
@@ -21,7 +20,7 @@ class Menu extends React.Component {
                             Contact
                         </NavLink>
                     </div>
-                    <CategoryMenuWidget categories={this.props.categories}/>
+                    <CategoryMenu categories={this.props.categories}/>
                 </div>
             </nav>
         );

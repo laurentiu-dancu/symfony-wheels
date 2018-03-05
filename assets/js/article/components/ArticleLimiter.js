@@ -1,7 +1,7 @@
 import React from 'react'
 import {DropdownButton, MenuItem} from 'react-bootstrap'
 
-const PageLimitWidget = (props) => (
+const ArticleLimiter = (props) => (
     <DropdownButton
         id={"items-per-page"}
         title={"Items per page: " + props.limit}
@@ -13,4 +13,4 @@ const PageLimitWidget = (props) => (
     </DropdownButton>
 );
 
-export default PageLimitWidget;
+export default ArticleLimiter;

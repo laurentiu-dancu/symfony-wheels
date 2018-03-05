@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import CommentWidget from './CommentWidget'
+import CommentWidget from './Comment'
 
-const ArticleDetailWidget = (props) => (
+const ArticleDetail = (props) => (
     <div>
         <h1>{ props.article.title }</h1>
         <hr/>
@@ -17,4 +16,4 @@ const ArticleDetailWidget = (props) => (
     </div>
 );
 
-export default ArticleDetailWidget
+export default ArticleDetail

@@ -1,4 +1,5 @@
-var Encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore');
+const path = require('path');
 
 Encore
     // directory where all compiled assets will be stored
@@ -9,8 +10,9 @@ Encore
     .cleanupOutputBeforeBuild()
     // will output as app/Resources/webpack/server-bundle.js
     .addEntry('server-bundle', ['babel-polyfill', './assets/js/app.js'])
-    // allow legacy applications to use $/jQuery as a global variable
-    .autoProvidejQuery()
 
 // export the final configuration
-module.exports = Encore.getWebpackConfig()
+module.exports = Encore.getWebpackConfig();
+
+// Add absolute imports support.
+module.exports.resolve.modules = [path.resolve('./assets/js'), 'node_modules'];

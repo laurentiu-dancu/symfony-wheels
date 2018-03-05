@@ -1,7 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import {Pagination} from 'react-bootstrap'
 
-const PagerWidget = (props) => (
+const propTypes = {
+    totalPages: PropTypes.number.required,
+    currentPage: PropTypes.number.required,
+    onClick: PropTypes.func.required,
+};
+
+const Pager = (props) => (
     <div>
         <Pagination className="pagination">
             {[...Array(props.totalPages)].map((x, i) => {
@@ -16,4 +23,6 @@ const PagerWidget = (props) => (
     </div>
 );
 
-export default PagerWidget;
+Pager.propTypes = propTypes;
+
+export default Pager;

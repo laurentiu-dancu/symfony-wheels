@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
-const ArticleListItemWidget = (props) => (
+const ArticleListItem = (props) => (
     <div id={props.id}>
         <h2>
             <Link to={'/article/' + props.article.id}>
@@ -14,4 +14,4 @@ const ArticleListItemWidget = (props) => (
     </div>
 );
 
-export default ArticleListItemWidget
+export default ArticleListItem

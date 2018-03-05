@@ -1,4 +1,5 @@
-let Encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore');
+const path = require('path');
 
 Encore
 // the project directory where all compiled assets will be stored
@@ -16,9 +17,6 @@ Encore
     // allow sass/scss files to be processed
     .enableSassLoader()
 
-    // allow legacy applications to use $/jQuery as a global variable
-    .autoProvidejQuery()
-
     .enableSourceMaps(!Encore.isProduction())
 
     // empty the outputPath dir before each build
@@ -33,3 +31,6 @@ Encore
 
 // export the final configuration
 module.exports = Encore.getWebpackConfig();
+
+// Add absolute imports support.
+module.exports.resolve.modules = [path.resolve('./assets/js'), 'node_modules'];

@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-export default class CommentWidget extends React.Component {
+export default class Comment extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = props;
@@ -17,7 +16,7 @@ export default class CommentWidget extends React.Component {
                     {this.state.content}
                 </p>
                 {this.state.children.map((comment) => (
-                    <CommentWidget offset={this.state.offset + 50} {...comment} key={comment.id}/>
+                    <Comment offset={this.state.offset + 50} {...comment} key={comment.id}/>
                 ))}
             </div>
         )

@@ -1,4 +1,4 @@
-import Types from '../constants'
+import Types from 'constants.js'
 
 const Actions = {
     fetchArticle: (baseUrl, id) => ({

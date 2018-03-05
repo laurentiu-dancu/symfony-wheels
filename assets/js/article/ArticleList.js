@@ -1,9 +1,8 @@
 import React from 'react'
-import ArticleListWidget from './components/ArticleListWidget';
 import {connect} from 'react-redux'
-import ArticleActions from '../actions/ArticleActions';
-import PageLimitWidget from "./components/PageLimitWidget";
-import PagerWidget from "./components/PagerWidget";
+import {ArticleActions} from 'actions';
+import {Pager} from "common";
+import {ArticleLimiter, ArticleLister} from "./components";
 
 class ArticleList extends React.Component {
     static prefetch(props) {
@@ -43,9 +42,9 @@ class ArticleList extends React.Component {
         } else {
             return (
                 <div>
-                    <ArticleListWidget categories={this.props.categories} category={this.props.category} articleList={this.props.articleList}/>
-                    <PageLimitWidget limit={this.props.limit} onChange={this.onLimitChange.bind(this)} />
-                    <PagerWidget totalPages={this.props.totalPages} currentPage={this.props.page} onClick={this.onPagerClick.bind(this)}/>
+                    <ArticleLister categories={this.props.categories} category={this.props.category} articleList={this.props.articleList}/>
+                    <ArticleLimiter limit={this.props.limit} onChange={this.onLimitChange.bind(this)} />
+                    <Pager totalPages={this.props.totalPages} currentPage={this.props.page} onClick={this.onPagerClick.bind(this)}/>
                 </div>
             )
         }

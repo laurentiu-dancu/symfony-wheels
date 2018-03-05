@@ -2,7 +2,7 @@ import React from 'react'
 import {DropdownButton} from 'react-bootstrap'
 import {Link} from "react-router-dom";
 
-const CategoryMenuWidget = (props) => (
+const CategoryMenu = (props) => (
     <div className={"category-dropdown-container"}>
         <DropdownButton id="category-selector" title="Categories">
             {Object.keys(props.categories).map(key => {
@@ -16,4 +16,4 @@ const CategoryMenuWidget = (props) => (
     </div>
 );
 
-export default CategoryMenuWidget;
+export default CategoryMenu;

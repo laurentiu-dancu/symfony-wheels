@@ -1,9 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import ContactFormWidget from '../components/ContactFormWidget';
-import FormErrorsWidget from '../components/FormErrorsWidget';
+import ContactFormWidget from './components/ContactFormWidget';
+import FormErrorsWidget from './components/FormErrorsWidget';
 
-export default class ContactFormContainer extends React.Component {
+export default class ContactForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.constructor.getInitialState();
@@ -91,9 +90,6 @@ export default class ContactFormContainer extends React.Component {
             <div className="contact-form-container">
                 <ContactFormWidget changeMethod={this.handleChange} submitMethod={this.handleSubmit} values={this.state} />
                 <FormErrorsWidget formErrors={this.state.formErrors} />
-                <Link to="/">
-                    <p>Go back</p>
-                </Link>
             </div>
         );
     }

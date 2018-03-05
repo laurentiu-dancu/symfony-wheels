@@ -1,6 +1,6 @@
 import React from 'react'
-import {Article, ArticleList} from './article'
-import ContactForm from './contact/containers/ContactFormContainer'
+import {Article, ArticleList} from 'article'
+import {ContactForm} from 'contact'
 
 const routes = [
     {
