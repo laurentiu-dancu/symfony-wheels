@@ -4,3 +4,9 @@ blog:
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

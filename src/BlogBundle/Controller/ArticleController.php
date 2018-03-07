@@ -3,23 +3,21 @@
 namespace BlogBundle\Controller;
 
 use BlogBundle\Entity\Article;
-use BlogBundle\Entity\ArticleCategory;
 use BlogBundle\Entity\Comment;
 use BlogBundle\Form\ArticleType;
 use BlogBundle\Form\CommentType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends Controller
 {
     const PAGINATION_LIMITS = [2, 5, 10, 20];
 
 
+    /**
+     * @Route("/", name="blog_homepage")
+     */
     public function indexAction(Request $request)
     {
         $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
@@ -56,6 +54,13 @@ class ArticleController extends Controller
         );
     }
 
+    /**
+     * @Route(
+     *     "/article/{id}",
+     *     name="article_detail",
+     *     requirements={"id": "\d+"}
+     * )
+     */
     public function detailAction(Request $request, Article $article)
     {
         $comment = new Comment();
@@ -91,6 +96,19 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * @Route(
+     *     "/article/create",
+     *     name="article_create",
+     *     defaults={"article": null}
+     * )
+
+     * @Route(
+     *     "/article/{id}/edit",
+     *     name="article_edit",
+     *     defaults={"article": null}
+     * )
+     */
     public function createAction(Request $request, Article $article = null)
     {
         $article = $article ?: new Article();
@@ -110,6 +128,15 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * @Route(
+     *     "/article/{id}/delete",
+     *     name="article_delete",
+     *     defaults={"article": null},
+     *     methods={"POST"},
+     *     requirements={"id": "\d+"}
+     * )
+     */
     public function deleteAction(Article $article)
     {
         $em = $this->getDoctrine()->getManager();

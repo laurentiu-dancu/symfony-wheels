@@ -6,9 +6,13 @@ use BlogBundle\Entity\Contact;
 use BlogBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends Controller
 {
+    /**
+     * @Route("/contact", name="contact_create")
+     */
     public function createAction(Request $request)
     {
         $contact = new Contact();

@@ -22,7 +22,8 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('categoryId', $categoryId);
         }
         if ($langcode) {
-            $qb = $qb->andWhere('a.langcode = :langcode')
+            $qb = $qb
+                ->andWhere('a.langcode = :langcode')
                 ->setParameter('langcode', $langcode);
         }
         $qb->setFirstResult($firstResult)

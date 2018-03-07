@@ -6,6 +6,7 @@ use BlogBundle\Entity\Article;
 use BlogBundle\Entity\ArticleCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends Controller
 {
@@ -23,6 +24,13 @@ class CategoryController extends Controller
         );
     }
 
+    /**
+     * @Route(
+     *     "/category/{id}",
+     *     name="category_list",
+     *     requirements={"id": "\d+"}
+     * )
+     */
     public function listAction(ArticleCategory $category, Request $request) {
         $repo = $this->getDoctrine()->getManager()->getRepository(Article::class);
 

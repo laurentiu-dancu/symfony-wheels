@@ -4,11 +4,10 @@ namespace BlogBundle\Controller;
 
 use BlogBundle\Entity\User;
 use BlogBundle\Event\UserRegisteredEvent;
-use BlogBundle\EventSubscriber\UserRegisteredSubscriber;
 use BlogBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class SecurityController
@@ -17,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SecurityController extends Controller
 {
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/login", name="login")
      */
     public function loginAction()
     {
@@ -32,6 +31,9 @@ class SecurityController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/register", name="register")
+     */
     public function registerAction(Request $request)
     {
         $user = new User();
