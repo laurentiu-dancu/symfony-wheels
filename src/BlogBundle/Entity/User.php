@@ -3,46 +3,78 @@
 namespace BlogBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * @ORM\Entity(repositoryClass="BlogBundle\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     *
      * @var integer
      */
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
+     *
      * @var string
      */
     private $username;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var string
      */
     private $firstName;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var string
      */
     private $lastName;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
+     *
      * @var string
      */
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     *
      * @var string
      */
     private $password;
 
     /**
+     * @ORM\Column(type="array")
+     *
      * @var array
      */
     private $roles = [];
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     *
+     * @var bool|null
+     */
+    private $subscribed;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="user")
+     *
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $comments;
 
     /**
      * @var string
@@ -233,10 +265,6 @@ class User implements UserInterface
 
         return $this;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $comments;
 
     /**
      * Constructor
@@ -284,11 +312,6 @@ class User implements UserInterface
     {
         return $this->getUsername();
     }
-    /**
-     * @var bool|null
-     */
-    private $subscribed;
-
 
     /**
      * Set subscribed.

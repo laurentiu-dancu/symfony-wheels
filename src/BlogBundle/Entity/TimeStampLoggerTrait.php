@@ -8,11 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 trait TimeStampLoggerTrait {
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     private $createdAt;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     private $updatedAt;

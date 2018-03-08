@@ -2,48 +2,76 @@
 
 namespace BlogBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Comment
+ * @ORM\Entity(repositoryClass="BlogBundle\Repository\CommentRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment
 {
     use TimeStampLoggerTrait;
 
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     *
      * @var integer
      */
     private $id;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     *
      * @var string
      */
     private $content;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     private $createdAt;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     private $updatedAt;
 
     /**
+     * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\Article", inversedBy="comments")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     *
      * @var \BlogBundle\Entity\Article
      */
     private $article;
 
     /**
+     * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
      * @var \BlogBundle\Entity\User
      */
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\Comment", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     *
      * @var \BlogBundle\Entity\Comment
      */
     private $parent;
 
+    /**
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="parent", fetch="EAGER")
+     *
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $children;
 
     /**
      * Get id
@@ -205,11 +233,6 @@ class Comment
         }
         return $this->parent->id;
     }
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $children;
 
     /**
      * Constructor

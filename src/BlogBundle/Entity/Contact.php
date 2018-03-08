@@ -2,39 +2,56 @@
 
 namespace BlogBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Contact
+ * @ORM\Entity(repositoryClass="BlogBundle\Repository\ContactRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Contact
 {
     use TimeStampLoggerTrait;
 
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     *
      * @var integer
      */
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var string
      */
     private $firstName;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var string
      */
     private $lastName;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     *
      * @var string
      */
     private $email;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     *
      * @var string
      */
     private $content;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     *
      * @var \DateTime
      */
     private $createdAt;

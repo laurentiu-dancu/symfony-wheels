@@ -2,22 +2,40 @@
 
 namespace BlogBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * ArticleCategory
+ *
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class ArticleCategory
 {
     use TimeStampLoggerTrait;
 
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     *
      * @var integer
      */
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var string
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Article", mappedBy="category")
+     *
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $articles;
 
     /**
      * Get id
@@ -52,11 +70,6 @@ class ArticleCategory
     {
         return $this->name;
     }
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $articles;
 
     /**
      * Constructor

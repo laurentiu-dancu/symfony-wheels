@@ -4,28 +4,38 @@ namespace BlogBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Article
  * @Vich\Uploadable
+ * @ORM\Entity(repositoryClass="BlogBundle\Repository\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
     use TimeStampLoggerTrait;
 
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     *
      * @var int
      */
     private $id;
 
     /**
      * @BlogBundle\Validator\Constraints\NotContainsPercent
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string
      */
     private $title;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     *
      * @var string
      */
     private $content;
@@ -36,16 +46,48 @@ class Article
      */
     private $imageFile;
 
-
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
      * @var string
      */
     private $image;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     *
      * @var boolean
      */
     private $deleted;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     *
+     * @var bool|null
+     */
+    private $dispatched;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string|null
+     */
+    private $langcode;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\ArticleCategory", inversedBy="articles")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *
+     * @var \BlogBundle\Entity\ArticleCategory
+     */
+    private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BlogBundle\Entity\Comment", mappedBy="article")
+     *
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $comments;
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -174,12 +216,6 @@ class Article
     }
 
     /**
-     * @var \BlogBundle\Entity\ArticleCategory
-     */
-    private $category;
-
-
-    /**
      * Set category
      *
      * @param \BlogBundle\Entity\ArticleCategory $category
@@ -213,10 +249,6 @@ class Article
     {
         return $this->deleted;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $comments;
 
     /**
      * Constructor
@@ -259,11 +291,6 @@ class Article
     {
         return $this->comments;
     }
-    /**
-     * @var bool|null
-     */
-    private $dispatched;
-
 
     /**
      * Set dispatched.
@@ -288,11 +315,6 @@ class Article
     {
         return $this->dispatched;
     }
-    /**
-     * @var string|null
-     */
-    private $langcode;
-
 
     /**
      * Set langcode.
