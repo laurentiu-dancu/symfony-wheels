@@ -95,3 +95,9 @@ jms_i18n_routing:
     default_locale: en
     locales: [ro, en]
     strategy: prefix_except_default
+
+sonata_block:
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
