@@ -101,3 +101,8 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable:   true

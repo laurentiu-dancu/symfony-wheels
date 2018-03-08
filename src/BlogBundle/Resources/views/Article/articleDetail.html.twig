@@ -44,7 +44,7 @@
                     <h4 class="modal-title" id="myModalLabel">Reply</h4>
                 </div>
                 {{ form_start(form) }}
-                <form method="post" action="{{ path('article_detail', {id: article.id }) }}">
+                <form method="post" action="{{ path('article_detail', {slug: article.slug }) }}">
                     <div class="modal-body">
                         {{ form_row(form.content) }}
                     </div>

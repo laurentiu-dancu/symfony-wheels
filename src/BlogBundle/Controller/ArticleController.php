@@ -6,6 +6,7 @@ use BlogBundle\Entity\Article;
 use BlogBundle\Entity\Comment;
 use BlogBundle\Form\ArticleType;
 use BlogBundle\Form\CommentType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,10 +57,10 @@ class ArticleController extends Controller
 
     /**
      * @Route(
-     *     "/article/{id}",
+     *     "/article/{slug}",
      *     name="article_detail",
-     *     requirements={"id": "\d+"}
      * )
+     * @ParamConverter("article", options={"mapping"={"slug"="slug"}})
      */
     public function detailAction(Request $request, Article $article)
     {

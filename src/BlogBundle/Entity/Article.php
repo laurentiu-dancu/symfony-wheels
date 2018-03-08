@@ -5,6 +5,7 @@ namespace BlogBundle\Entity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Article
@@ -73,6 +74,12 @@ class Article
      * @var string|null
      */
     private $langcode;
+
+    /**
+     * @Gedmo\Slug(fields={"title", "id"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\ManyToOne(targetEntity="BlogBundle\Entity\ArticleCategory", inversedBy="articles")
@@ -338,5 +345,10 @@ class Article
     public function getLangcode()
     {
         return $this->langcode;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
