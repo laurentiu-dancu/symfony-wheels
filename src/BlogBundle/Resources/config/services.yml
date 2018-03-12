@@ -15,3 +15,13 @@ services:
         arguments: ["blog:notify-article", "@doctrine.orm.entity_manager"]
         tags:
             command: 'blog:notify-article'
+
+    BlogBundle\Admin\ArticleAdmin:
+        tags:
+           - { name: sonata.admin, manager_type: orm, label: Article }
+        arguments: [~, BlogBundle\Entity\Article, ~]
+
+    BlogBundle\Admin\CategoryAdmin:
+        tags:
+           - { name: sonata.admin, manager_type: orm, label: Category }
+        arguments: [~, BlogBundle\Entity\ArticleCategory, ~]
